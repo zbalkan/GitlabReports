@@ -1,12 +1,19 @@
-﻿using System;
+﻿using SemgrepReports.Models;
+using System;
+using System.IO;
+using System.Text.Json;
 
 namespace SemgrepReports
 {
-    internal class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Source: https://gitlab.com/gitlab-org/security-products/analyzers/secrets/-/raw/master/qa/expect/secrets/gl-secret-detection-report.json
+            const string fileName = "report.json"; // Get path from arguments
+            string jsonString = File.ReadAllText(fileName);
+            var report = JsonSerializer.Deserialize<Root>(jsonString);
+            Console.WriteLine(report.Scan.Status);
         }
     }
 }
