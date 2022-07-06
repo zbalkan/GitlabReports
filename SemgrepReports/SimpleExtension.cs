@@ -10,7 +10,7 @@ namespace SemgrepReports
         {
             return container
                 .Border(1)
-                .Background(dark ? Colors.Grey.Lighten2 : Colors.White)
+                .Background(dark ? Colors.Grey.Lighten3 : Colors.White)
                 .Padding(10);
         }
 
@@ -20,8 +20,8 @@ namespace SemgrepReports
         // allows to inject any type of content, e.g. image
         public static IContainer ValueCell(this IContainer container) => container.Cell(false);
 
-        public static TextSpanDescriptor H1(this TextSpanDescriptor text) => text.Bold().FontSize(20).FontColor(Colors.Blue.Medium);
+        public static TextSpanDescriptor H1(this TextSpanDescriptor text) => text.Bold().FontSize(20).FontColor(Colors.Grey.Darken2);
 
-        public static TextSpanDescriptor H2(this TextSpanDescriptor text) => text.SemiBold().FontSize(14).FontColor(Colors.Blue.Medium);
+        public static TextSpanDescriptor H2(this TextSpanDescriptor text) => text.SemiBold().FontSize(14).FontColor(Colors.Grey.Darken2);
     }
 }

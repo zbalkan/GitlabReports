@@ -50,6 +50,7 @@ namespace SemgrepReports
         {
             page
                 .Header()
+                .AlignCenter()
                 .Text($"Static Application Security Testing (SAST) Report (v{report.Version})")
                 .H1();
         }
