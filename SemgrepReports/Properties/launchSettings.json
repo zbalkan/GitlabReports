@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SemgrepReports": {
+      "commandName": "Project",
+      "commandLineArgs": "-i report.json -o report.pdf"
+    }
+  }
+}
