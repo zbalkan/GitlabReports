@@ -2,7 +2,6 @@
 
 namespace SemgrepReports.Models
 {
-    // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
     public class Commit
     {
         [JsonPropertyName("sha")]

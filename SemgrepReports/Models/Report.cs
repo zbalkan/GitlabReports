@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SemgrepReports.Models
 {
-    public class Root
+    public class Report
     {
         [JsonPropertyName("version")]
         public string Version { get; set; }
