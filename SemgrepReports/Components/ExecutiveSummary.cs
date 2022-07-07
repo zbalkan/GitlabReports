@@ -35,7 +35,7 @@ namespace SemgrepReports.Components
                     decoration
                         .Before()
                         .Text("Executive Summary")
-                        .H2();
+                        .H1();
 
                     decoration
                     .Content()

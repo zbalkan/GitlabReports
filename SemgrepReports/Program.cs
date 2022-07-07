@@ -1,5 +1,4 @@
-﻿using SemgrepReports.Models;
-using System;
+﻿using System;
 using System.Linq;
 using Utility.CommandLine;
 

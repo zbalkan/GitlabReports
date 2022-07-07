@@ -52,7 +52,7 @@ namespace SemgrepReports
                 .Header()
                 .AlignCenter()
                 .Text($"Static Application Security Testing (SAST) Report (v{report.Version})")
-                .H1();
+                .HeaderOrFooter();
         }
 
         private static void GenerateContent(Report report, PageDescriptor page)
@@ -70,7 +70,7 @@ namespace SemgrepReports
                     column.Item().Component(new ExecutiveSummary(vulns));
 
                     column.Item().PageBreak();
-                    column.Item().Text("Findings").H2();
+                    column.Item().Text("Findings").H1();
 
                     foreach (var vuln in vulns)
                     {
@@ -78,7 +78,7 @@ namespace SemgrepReports
                     }
                 });
         }
-   
+
         private static void GenerateFooter(Report report, PageDescriptor page)
         {
             page
@@ -86,12 +86,12 @@ namespace SemgrepReports
                 .AlignCenter()
                 .Text(x =>
                 {
-                    x.Span("Page ");
-                    x.CurrentPageNumber();
-                    x.Span(" of ");
-                    x.TotalPages();
+                    x.Span("Page ").HeaderOrFooter();
+                    x.CurrentPageNumber().HeaderOrFooter();
+                    x.Span(" of ").HeaderOrFooter();
+                    x.TotalPages().HeaderOrFooter();
                     x.EmptyLine();
-                    x.Span($"(v{report.Version})");
+                    x.Span($"(v{report.Version})").HeaderOrFooter();
                 });
         }
     }
