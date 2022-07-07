@@ -89,13 +89,15 @@ namespace SemgrepReports
 
                    column.Item().IndexedSection("Findings").Text("Findings").H1();
 
-                   foreach (var vuln in report
-                                           .Vulnerabilities
-                                           .OrderBy(x => x.Priority)
-                                           .ThenBy(x => x.Location.File)
-                                           .ThenBy(x => x.Location.StartLine))
+                   var vulns = report.Vulnerabilities
+                                       .OrderBy(x => x.Priority)
+                                       .ThenBy(x => x.Location.File)
+                                       .ThenBy(x => x.Location.StartLine)
+                                       .ToList();
+
+                   for (int i = 0; i < vulns.Count; i++)
                    {
-                       column.Item().Component(new Finding(vuln));
+                       column.Item().Component(new Finding(vulns[i], i + 1));
                    }
 
                    column.Item().PageBreak();
