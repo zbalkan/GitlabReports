@@ -11,3 +11,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Roslynator", "RCS1170:Use read-only auto-implemented property.", Justification = "<Pending>", Scope = "member", Target = "~P:SemgrepReports.Program.OutputFile")]
 [assembly: SuppressMessage("Usage", "CA2208:Instantiate argument exceptions correctly", Justification = "<Pending>", Scope = "member", Target = "~M:SemgrepReports.Program.Main(System.String[])")]
 [assembly: SuppressMessage("Roslynator", "RCS1163:Unused parameter.", Justification = "<Pending>", Scope = "member", Target = "~M:SemgrepReports.Program.Main(System.String[])")]
+[assembly: SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>", Scope = "member", Target = "~M:SemgrepReports.Program.Main(System.String[])")]

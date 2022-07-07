@@ -15,13 +15,13 @@ namespace SemgrepReports
         /// <summary>
         ///     Path of configuration file.
         /// </summary>
-        [Argument('i', "input", "Path of json file.")]
+        [Argument('i', "input", "Path of JSON file.")]
         private static string InputFile { get; set; }
 
         /// <summary>
         ///     Path of configuration file.
         /// </summary>
-        [Argument('o', "output", "Path of pdf file.")]
+        [Argument('o', "output", "Path of PDF file.")]
         private static string OutputFile { get; set; }
 
         public static void Main(string[] args)
@@ -64,13 +64,12 @@ namespace SemgrepReports
         {
             var helpAttributes = Arguments.GetArgumentInfo(typeof(Program));
 
-            Console.WriteLine("Short\tLong\tFunction");
-            Console.WriteLine("-----\t----\t--------");
+            Console.WriteLine("Short\tLong      \tFunction");
+            Console.WriteLine("-----\t----------\t--------");
 
             foreach (var item in helpAttributes)
             {
-                var result = "-" + item.ShortName + "\t--" +item.LongName + "\t" + item.HelpText;
-                Console.WriteLine(result);
+                Console.WriteLine($"-{item.ShortName}\t--{item.LongName,-10}\t{item.HelpText}");
             }
         }
     }
