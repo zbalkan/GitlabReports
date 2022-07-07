@@ -16,61 +16,61 @@ namespace SemgrepReports.Components
         public void Compose(IContainer container)
         {
             container
-                 .Decoration(decoration =>
-                 {
-                     decoration
-                     .Before()
-                     .Section("Overview")
-                     .Text("Overview")
-                     .H1();
+                .Section("Overview")
+                .Decoration(decoration =>
+                {
+                    decoration
+                    .Before()
+                    .Text("Overview")
+                    .H1();
 
-                     decoration
-                          .Content()
-                          .PaddingTop(1, Unit.Centimetre)
-                          .PaddingBottom(1, Unit.Centimetre)
-                          .Table(table =>
-                          {
-                              table.ColumnsDefinition(columns =>
-                              {
-                                  columns.ConstantColumn(80);
-                                  columns.RelativeColumn();
-                                  columns.ConstantColumn(80);
-                                  columns.RelativeColumn();
-                              });
+                    decoration
+                         .Content()
+                         .PaddingTop(1, Unit.Centimetre)
+                         .PaddingBottom(1, Unit.Centimetre)
+                         .Table(table =>
+                         {
+                             table.ColumnsDefinition(columns =>
+                             {
+                                 columns.ConstantColumn(80);
+                                 columns.RelativeColumn();
+                                 columns.ConstantColumn(80);
+                                 columns.RelativeColumn();
+                             });
 
                               // Table header
-                              table.Cell().ColumnSpan(2).LabelCell("Scan");
-                              table.Cell().ColumnSpan(2).LabelCell("Scanner");
+                             table.Cell().ColumnSpan(2).LabelCell("Scan");
+                             table.Cell().ColumnSpan(2).LabelCell("Scanner");
 
                               // 1st row
-                              table.Cell().LabelCell("Type");
-                              table.Cell().ValueCell().Text(_report.Scan.Type);
+                             table.Cell().LabelCell("Type");
+                             table.Cell().ValueCell().Text(_report.Scan.Type);
 
-                              table.Cell().LabelCell("Name");
-                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Name);
+                             table.Cell().LabelCell("Name");
+                             table.Cell().ValueCell().Text(_report.Scan.Scanner.Name);
 
                               // 2nd row
-                              table.Cell().LabelCell("Start Time");
-                              table.Cell().ValueCell().Text(_report.Scan.StartTime);
+                             table.Cell().LabelCell("Start Time");
+                             table.Cell().ValueCell().Text(_report.Scan.StartTime);
 
-                              table.Cell().LabelCell("URL");
-                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Url);
+                             table.Cell().LabelCell("URL");
+                             table.Cell().ValueCell().Text(_report.Scan.Scanner.Url);
 
                               // 3rd row
-                              table.Cell().LabelCell("End Time");
-                              table.Cell().ValueCell().Text(_report.Scan.EndTime);
+                             table.Cell().LabelCell("End Time");
+                             table.Cell().ValueCell().Text(_report.Scan.EndTime);
 
-                              table.Cell().LabelCell("Vendor");
-                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Vendor);
+                             table.Cell().LabelCell("Vendor");
+                             table.Cell().ValueCell().Text(_report.Scan.Scanner.Vendor);
 
                               // 4th row
-                              table.Cell().LabelCell("Status");
-                              table.Cell().ValueCell().Text(_report.Scan.Status);
+                             table.Cell().LabelCell("Status");
+                             table.Cell().ValueCell().Text(_report.Scan.Status);
 
-                              table.Cell().LabelCell("Version");
-                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Version);
-                          });
-                 });
+                             table.Cell().LabelCell("Version");
+                             table.Cell().ValueCell().Text(_report.Scan.Scanner.Version);
+                         });
+                });
         }
     }
 }

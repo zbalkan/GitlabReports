@@ -28,11 +28,11 @@ namespace SemgrepReports.Components
                 .Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).Append(" Low severity vulnerabilities.");
 
             container
+                .Section("Executive Summary")
                 .Decoration(decoration =>
                 {
                     decoration
                         .Before()
-                        .Section("Executive Summary")
                         .Text("Executive Summary")
                         .H1();
 

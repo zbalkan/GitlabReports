@@ -16,14 +16,14 @@ namespace SemgrepReports.Components
 
         public void Compose(IContainer container)
         {
+            var finding = $"{_vuln.Name} in {_vuln.Location.File}:L{_vuln.Location.StartLine}";
+
             container
+                .Section(finding)
                 .Decoration(decoration =>
                 {
-                    var finding = $"{_vuln.Name} in {_vuln.Location.File}:L{_vuln.Location.StartLine}";
-
                     decoration
                          .Before()
-                         .Section(finding)
                          .PaddingTop(1, Unit.Centimetre)
                          .Text(finding)
                          .H2();
@@ -59,7 +59,6 @@ namespace SemgrepReports.Components
                              table.Cell().LabelCell("Line");
                              table.Cell().ValueCell().Text(_vuln.Location.StartLine);
 
-
                              // 4th row
                              table.Cell().RowSpan(10).LabelCell("Description");
                              table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Description);
@@ -69,7 +68,6 @@ namespace SemgrepReports.Components
                              table.Cell().RowSpan(10).LabelCell("Message");
                              table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Message);
                          });
-
                 }
             );
         }

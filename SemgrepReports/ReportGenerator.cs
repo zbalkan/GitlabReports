@@ -76,14 +76,7 @@ namespace SemgrepReports
 
         private static void GenerateContent(Report report, PageDescriptor page)
         {
-            var vulns = report
-                .Vulnerabilities
-                .OrderBy(x => x.Priority)
-                .ThenBy(x => x.Location.File)
-                .ThenBy(x =>x.Location.StartLine)
-                .ToList();
-
-            page
+             page
                 .Content()
                 .Column(column =>
                 {
@@ -95,7 +88,12 @@ namespace SemgrepReports
                     column.Item().PageBreak();
 
                     column.Item().Section("Findings").Text("Findings").H1();
-                    foreach (var vuln in vulns)
+
+                    foreach (var vuln in report
+                                            .Vulnerabilities
+                                            .OrderBy(x => x.Priority)
+                                            .ThenBy(x => x.Location.File)
+                                            .ThenBy(x => x.Location.StartLine))
                     {
                         column.Item().Component(new Finding(vuln));
                     }
