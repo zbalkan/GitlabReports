@@ -12,4 +12,8 @@
     <PackageReference Include="Utility.CommandLine.Arguments" Version="6.0.0" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <AssemblyName>sr</AssemblyName>
+  </PropertyGroup>
+
 </Project>

@@ -4,25 +4,25 @@ Parses Semgrep JSON reports and generates a PDF report.
 
 ## USAGE
 ```
-SemgrepReports.exe [-short | --long] [args]
+sr [-short | --long] [args]
 
 Short   Long    Function
 -----   ----    --------
 h       help    Displays help text and exits.
-i       input   Path of json file.
-o       output  Path of pdf file.
+i       input   Path of JSON file.
+o       output  Path of PDF file.
 
 ```
 
 ## Examples
 On Windows:
 ```bash
-SemgrepReports.exe -i reports.json -o reports.pdf
-SemgrepReports.exe -i reports.json # output file will be saved into working directory as reports.pdf
+sr.exe -i reports.json -o reports.pdf
+sr.exe -i reports.json # output file will be saved into working directory as reports.pdf
 ```
 
 On Linux:
 ```bash
-./SemgrepReports -i reports.json -o reports.pdf
-./SemgrepReports -i reports.json # output file will be saved into working directory as reports.pdf
+./sr -i reports.json -o reports.pdf
+./sr -i reports.json # output file will be saved into working directory as reports.pdf
 ```
