@@ -3,6 +3,7 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SemgrepReports.Components;
 using SemgrepReports.Models;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -13,6 +14,11 @@ namespace SemgrepReports
     {
         public static Report Import(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                throw new System.ArgumentException($"'{nameof(input)}' cannot be null or empty.", nameof(input));
+            }
+
             var jsonString = File.ReadAllText(input);
             var report = JsonSerializer.Deserialize<Report>(jsonString);
             return report;
@@ -20,6 +26,16 @@ namespace SemgrepReports
 
         public static void Export(Report report, string output)
         {
+            if (report is null)
+            {
+                throw new ArgumentNullException(nameof(report));
+            }
+
+            if (string.IsNullOrEmpty(output))
+            {
+                throw new ArgumentException($"'{nameof(output)}' cannot be null or empty.", nameof(output));
+            }
+
             Document.Create(container =>
             {
                 _ = container.Page(page =>
@@ -65,7 +81,8 @@ namespace SemgrepReports
 
             page
                 .Content()
-                .Column(column => {
+                .Column(column =>
+                {
                     column.Item().Component(new ReportMetadata(report));
                     column.Item().Component(new ExecutiveSummary(vulns));
 
