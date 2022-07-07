@@ -21,9 +21,7 @@ namespace SemgrepReports
             }
 
             var jsonString = File.ReadAllText(input);
-            var defaultOptions = new JsonSerializerOptions();
-            var report = JsonSerializer.Deserialize<Report>(jsonString, defaultOptions);
-            return report;
+            return JsonSerializer.Deserialize<Report>(jsonString, new JsonSerializerOptions());
         }
 
         public static void Export(Report report, string output)
