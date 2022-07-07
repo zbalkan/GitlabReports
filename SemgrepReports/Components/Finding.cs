@@ -16,7 +16,7 @@ namespace SemgrepReports.Components
 
         public void Compose(IContainer container)
         {
-            var finding = $"{_vuln.Name} in {_vuln.Location.File}:L{_vuln.Location.StartLine}";
+            var finding = $"{_vuln.Name} in file: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
 
             container
                 .IndexedSection(finding, 2)
