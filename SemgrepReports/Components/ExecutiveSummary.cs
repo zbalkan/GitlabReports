@@ -33,6 +33,7 @@ namespace SemgrepReports.Components
                 {
                     decoration
                         .Before()
+                        .PaddingBottom(1, Unit.Centimetre)
                         .Text("Executive Summary")
                         .H1();
 
