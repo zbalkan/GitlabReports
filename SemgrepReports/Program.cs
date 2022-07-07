@@ -53,7 +53,6 @@ namespace SemgrepReports
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
             Console.WriteLine($"ERROR:{((Exception)e.ExceptionObject).Message}");
-            Console.ReadLine();
             Environment.Exit(0);
         }
 
@@ -64,7 +63,7 @@ namespace SemgrepReports
         {
             var helpAttributes = Arguments.GetArgumentInfo(typeof(Program));
 
-            Console.WriteLine("Short\tLong      \tFunction");
+            Console.WriteLine("Short\t   Long   \tFunction");
             Console.WriteLine("-----\t----------\t--------");
 
             foreach (var item in helpAttributes)
