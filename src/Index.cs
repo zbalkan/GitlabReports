@@ -18,9 +18,6 @@ namespace SemgrepReports
             _sections = new List<Tuple<string, int>>();
         }
 
-        public void AddSection(string section, int level)
-        {
-            _sections.Add(new Tuple<string, int>(section, level));
-        }
+        public void AddSection(string section, int level) => _sections.Add(new Tuple<string, int>(section, level));
     }
 }

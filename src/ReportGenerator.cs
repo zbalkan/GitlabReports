@@ -36,16 +36,13 @@ namespace SemgrepReports
                 throw new ArgumentException($"'{nameof(output)}' cannot be null or empty.", nameof(output));
             }
 
-            Document.Create(container =>
-            {
-                _ = container.Page(page =>
+            Document.Create(container => _ = container.Page(page =>
                 {
                     SetupPage(page);
                     GenerateHeader(report, page);
                     GenerateContent(report, page);
                     GenerateFooter(page);
-                });
-            })
+                }))
                 .GeneratePdf(output);
         }
 
@@ -65,19 +62,14 @@ namespace SemgrepReports
             page.DefaultTextStyle(textStyle);
         }
 
-        private static void GenerateHeader(Report report, PageDescriptor page)
-        {
-            page
+        private static void GenerateHeader(Report report, PageDescriptor page) => page
                 .Header()
                 .AlignCenter()
                 .AlignTop()
                 .Text($"Static Application Security Testing (SAST) Report (v{report.Version})")
                 .HeaderOrFooter();
-        }
 
-        private static void GenerateContent(Report report, PageDescriptor page)
-        {
-            page
+        private static void GenerateContent(Report report, PageDescriptor page) => page
                .Content()
                .Column(column =>
                {
@@ -107,11 +99,8 @@ namespace SemgrepReports
                        column.Item().Component(new FindingDetail(vuln, order));
                    }
                });
-        }
 
-        private static void GenerateFooter(PageDescriptor page)
-        {
-            page
+        private static void GenerateFooter(PageDescriptor page) => page
                 .Footer()
                 .Column(column =>
                 {
@@ -126,7 +115,6 @@ namespace SemgrepReports
                             x.TotalPages().HeaderOrFooter();
                         });
                 });
-        }
 
         private static string GetFontByOs() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Verdana" : "DejaVu Sans";
     }

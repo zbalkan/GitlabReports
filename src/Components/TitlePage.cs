@@ -13,19 +13,12 @@ namespace SemgrepReports.Components
             _report = report;
         }
 
-        public void Compose(IContainer container)
-        {
-            container
-                .Decoration(decoration =>
-                {
-                    decoration
+        public void Compose(IContainer container) => container
+                .Decoration(decoration => decoration
                         .Content()
                         .AlignCenter()
                         .PaddingTop(10, Unit.Centimetre)
                         .Text($"Static Application Security Testing (SAST) Report\n(v{_report.Version})")
-                        .Title();
-                }
-            );
-        }
+                        .Title());
     }
 }

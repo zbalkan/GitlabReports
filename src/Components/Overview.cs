@@ -13,9 +13,7 @@ namespace SemgrepReports.Components
             _report = report;
         }
 
-        public void Compose(IContainer container)
-        {
-            container
+        public void Compose(IContainer container) => container
                 .IndexedSection("Overview")
                 .Decoration(decoration =>
                 {
@@ -38,32 +36,32 @@ namespace SemgrepReports.Components
                                  columns.RelativeColumn();
                              });
 
-                              // Table header
+                             // Table header
                              table.Cell().ColumnSpan(2).LabelCell("Scan");
                              table.Cell().ColumnSpan(2).LabelCell("Scanner");
 
-                              // 1st row
+                             // 1st row
                              table.Cell().LabelCell("Type");
                              table.Cell().ValueCell().Text(_report.Scan.Type);
 
                              table.Cell().LabelCell("Name");
                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Name);
 
-                              // 2nd row
+                             // 2nd row
                              table.Cell().LabelCell("Start Time");
                              table.Cell().ValueCell().Text(_report.Scan.StartTime);
 
                              table.Cell().LabelCell("URL");
                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Url);
 
-                              // 3rd row
+                             // 3rd row
                              table.Cell().LabelCell("End Time");
                              table.Cell().ValueCell().Text(_report.Scan.EndTime);
 
                              table.Cell().LabelCell("Vendor");
                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Vendor);
 
-                              // 4th row
+                             // 4th row
                              table.Cell().LabelCell("Status");
                              table.Cell().ValueCell().Text(_report.Scan.Status);
 
@@ -71,6 +69,5 @@ namespace SemgrepReports.Components
                              table.Cell().ValueCell().Text(_report.Scan.Scanner.Version);
                          });
                 });
-        }
     }
 }

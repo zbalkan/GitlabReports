@@ -14,9 +14,7 @@ namespace SemgrepReports.Components
             _vulns = vulns;
         }
 
-        public void Compose(IContainer container)
-        {
-            container
+        public void Compose(IContainer container) => container
                 .IndexedSection("Finding Summary")
                 .Decoration(decoration =>
                 {
@@ -43,7 +41,7 @@ namespace SemgrepReports.Components
                                  table.Cell().LabelCell("Severity");
                                  table.Cell().LabelCell("Vulnerability");
 
-                                 for (int i = 0; i < _vulns.Count; i++)
+                                 for (var i = 0; i < _vulns.Count; i++)
                                  {
                                      var vuln = _vulns[i];
                                      var order = i + 1;
@@ -56,6 +54,5 @@ namespace SemgrepReports.Components
                                  }
                              });
                 });
-        }
     }
 }
