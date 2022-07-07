@@ -8,6 +8,7 @@ namespace SemgrepReports.Components
     internal sealed class Finding : IComponent
     {
         private readonly Vulnerability _vuln;
+
         public Finding(Vulnerability vuln)
         {
             _vuln = vuln;
@@ -18,9 +19,18 @@ namespace SemgrepReports.Components
             container
                 .Decoration(decoration =>
                 {
+                    var finding = $"{_vuln.Name} in {_vuln.Location.File}:L{_vuln.Location.StartLine}";
+
+                    decoration
+                         .Before()
+                         .Section(finding)
+                         .PaddingTop(1, Unit.Centimetre)
+                         .Text(finding)
+                         .H2();
+
                     decoration
                          .Content()
-                         .PaddingTop(1, Unit.Centimetre)
+                         .PaddingTop(0.5f, Unit.Centimetre)
                          .Table(table =>
                          {
                              table.ColumnsDefinition(columns =>

@@ -43,7 +43,7 @@ namespace SemgrepReports
                     SetupPage(page);
                     GenerateHeader(report, page);
                     GenerateContent(report, page);
-                    GenerateFooter(report, page);
+                    GenerateFooter(page);
                 });
             })
                 .GeneratePdf(output);
@@ -52,12 +52,15 @@ namespace SemgrepReports
         private static void SetupPage(PageDescriptor page)
         {
             page.Size(PageSizes.A4);
-            page.Margin(2, Unit.Centimetre);
+            page.MarginTop(2, Unit.Centimetre);
+            page.MarginRight(2, Unit.Centimetre);
+            page.MarginBottom(1, Unit.Centimetre);
+            page.MarginLeft(2, Unit.Centimetre);
             page.PageColor(Colors.White);
 
             var textStyle = new TextStyle()
                 .FontSize(11)
-                .FontFamily("Times New Roman");
+                .FontFamily("Arial");
 
             page.DefaultTextStyle(textStyle);
         }
@@ -77,17 +80,18 @@ namespace SemgrepReports
                 .Vulnerabilities
                 .OrderBy(x => x.Priority)
                 .ThenBy(x => x.Location.File)
+                .ThenBy(x =>x.Location.StartLine)
                 .ToList();
 
             page
                 .Content()
                 .Column(column =>
                 {
-                    column.Item().Component(new ReportMetadata(report));
+                    column.Item().Component(new Overview(report));
                     column.Item().Component(new ExecutiveSummary(vulns));
 
                     column.Item().PageBreak();
-                    column.Item().Text("Findings").H1();
+                    column.Item().Section("Findings").Text("Findings").H1();
 
                     foreach (var vuln in vulns)
                     {
@@ -96,7 +100,7 @@ namespace SemgrepReports
                 });
         }
 
-        private static void GenerateFooter(Report report, PageDescriptor page)
+        private static void GenerateFooter(PageDescriptor page)
         {
             page
                 .Footer()
@@ -107,8 +111,6 @@ namespace SemgrepReports
                     x.CurrentPageNumber().HeaderOrFooter();
                     x.Span(" of ").HeaderOrFooter();
                     x.TotalPages().HeaderOrFooter();
-                    x.EmptyLine();
-                    x.Span($"(v{report.Version})").HeaderOrFooter();
                 });
         }
     }
