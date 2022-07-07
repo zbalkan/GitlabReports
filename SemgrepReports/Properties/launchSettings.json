@@ -2,7 +2,7 @@
   "profiles": {
     "SemgrepReports": {
       "commandName": "Project",
-      "commandLineArgs": "-h"
+      "commandLineArgs": "-i report.json"
     }
   }
 }

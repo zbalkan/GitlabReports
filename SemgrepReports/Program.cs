@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Utility.CommandLine;
 
 namespace SemgrepReports
@@ -25,7 +26,7 @@ namespace SemgrepReports
 
         public static void Main(string[] args)
         {
-            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 
             Arguments.Populate();
 
@@ -33,6 +34,16 @@ namespace SemgrepReports
             {
                 ShowHelp();
                 return;
+            }
+
+            if (string.IsNullOrEmpty(InputFile))
+            {
+                throw new ArgumentException($"'{nameof(InputFile)}' cannot be null or empty.", nameof(InputFile));
+            }
+
+            if(string.IsNullOrEmpty(OutputFile))
+            {
+                OutputFile = Path.ChangeExtension(InputFile, ".pdf");
             }
 
             var report = ReportGenerator.Import(InputFile);
