@@ -87,12 +87,14 @@ namespace SemgrepReports
                 .Content()
                 .Column(column =>
                 {
+                    column.Item().Component(new TitlePage(report));
+                    column.Item().PageBreak();
+
                     column.Item().Component(new Overview(report));
                     column.Item().Component(new ExecutiveSummary(vulns));
-
                     column.Item().PageBreak();
-                    column.Item().Section("Findings").Text("Findings").H1();
 
+                    column.Item().Section("Findings").Text("Findings").H1();
                     foreach (var vuln in vulns)
                     {
                         column.Item().Component(new Finding(vuln));
