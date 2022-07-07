@@ -5,7 +5,7 @@ using SemgrepReports.Models;
 
 namespace SemgrepReports.Components
 {
-    internal class Finding : IComponent
+    internal sealed class Finding : IComponent
     {
         private readonly Vulnerability _vuln;
         public Finding(Vulnerability vuln)

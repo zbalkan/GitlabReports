@@ -1,5 +1,4 @@
 ﻿using QuestPDF.Fluent;
-using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text;
 
 namespace SemgrepReports.Components
 {
-    internal class ExecutiveSummary : IComponent
+    internal sealed class ExecutiveSummary : IComponent
     {
         private readonly List<Vulnerability> _vulns;
 
@@ -19,14 +18,14 @@ namespace SemgrepReports.Components
 
         public void Compose(IContainer container)
         {
-            var summary = new StringBuilder();
+            var summary = new StringBuilder(100);
             summary.Append("During the scan ").Append(_vulns.Count).Append(" vulnerabilities have been found.")
-                .Append(_vulns.Where(v => v.Priority <= 3).Count()).AppendLine(" of them have a higher severity than Medium.")
+                .Append(_vulns.Count(v => v.Priority <= 3)).AppendLine(" of them have a higher severity than Medium.")
                 .Append("The report includes ")
-                .Append(_vulns.Where(v => v.Priority == 1).Count()).Append(" Critical, ")
-                .Append(_vulns.Where(v => v.Priority == 2).Count()).Append(" High, ")
-                .Append(_vulns.Where(v => v.Priority == 3).Count()).Append(" Medium, and")
-                .Append(_vulns.Where(v => v.Priority == 4).Count()).Append(" Low severity vulnerabilities.");
+                .Append(_vulns.Count(v => v.Priority == 1)).Append(" Critical, ")
+                .Append(_vulns.Count(v => v.Priority == 2)).Append(" High, ")
+                .Append(_vulns.Count(v => v.Priority == 3)).Append(" Medium, and")
+                .Append(_vulns.Count(v => v.Priority == 4)).Append(" Low severity vulnerabilities.");
 
 
             container

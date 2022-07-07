@@ -4,7 +4,7 @@ using SemgrepReports.Models;
 
 namespace SemgrepReports.Components
 {
-    internal class ReportMetadata : IComponent
+    internal sealed class ReportMetadata : IComponent
     {
         private readonly Report _report;
         public ReportMetadata(Report report)
