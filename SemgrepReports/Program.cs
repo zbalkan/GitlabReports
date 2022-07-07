@@ -25,6 +25,8 @@ namespace SemgrepReports
 
         public static void Main(string[] args)
         {
+            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+
             Arguments.Populate();
 
             if (ShowHelpText)
@@ -35,6 +37,14 @@ namespace SemgrepReports
 
             var report = ReportGenerator.Import(InputFile);
             ReportGenerator.Export(report, OutputFile);
+        }
+
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("Press Enter to Exit");
+            Console.ReadLine();
+            Environment.Exit(0);
         }
 
         /// <summary>
