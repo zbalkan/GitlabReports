@@ -49,7 +49,7 @@ jobs:
       run: |
         release_name="SemgrepReports-v1.0-${{ matrix.target }}"
         # Build no self contained
-        dotnet publish SemgrepReports/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --no-self-contained
+        dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --no-self-contained
         
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
@@ -66,7 +66,7 @@ jobs:
       run: |
         release_name="SemgrepReports-v1.0-${{ matrix.target }}-self-contained"
         # Build self contained & trimmed
-        dotnet publish SemgrepReports/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true 
+        dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true 
         
         # Remove PDB files
         rm ./${release_name}/*.pdb
@@ -97,6 +97,5 @@ jobs:
         files: |
           *.zip
           *.tar.gz
-          bom.*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

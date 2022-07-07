@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "SemgrepReports": {
-      "commandName": "Project",
-      "commandLineArgs": "-h"
-    }
-  }
-}
