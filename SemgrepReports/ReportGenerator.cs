@@ -6,6 +6,7 @@ using SemgrepReports.Models;
 using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace SemgrepReports
@@ -60,9 +61,21 @@ namespace SemgrepReports
 
             var textStyle = new TextStyle()
                 .FontSize(11)
-                .FontFamily("Arial");
+                .FontFamily(GetFontByOs());
 
             page.DefaultTextStyle(textStyle);
+        }
+
+        private static string GetFontByOs()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return "Verdana";
+            }
+            else
+            {
+                return "DejaVu Sans";
+            }
         }
 
         private static void GenerateHeader(Report report, PageDescriptor page)
