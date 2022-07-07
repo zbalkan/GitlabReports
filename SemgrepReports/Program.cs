@@ -70,7 +70,7 @@ namespace SemgrepReports
 
             foreach (var item in helpAttributes)
             {
-                var result = item.ShortName + "\t" + item.LongName + "\t" + item.HelpText;
+                var result = "-" + item.ShortName + "\t--" +item.LongName + "\t" + item.HelpText;
                 Console.WriteLine(result);
             }
         }
