@@ -52,7 +52,7 @@ namespace SemgrepReports
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
-            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine(((Exception)e.ExceptionObject).Message);
             Console.WriteLine("Press Enter to Exit");
             Console.ReadLine();
             Environment.Exit(0);
