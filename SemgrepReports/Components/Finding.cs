@@ -50,7 +50,7 @@ namespace SemgrepReports.Components
 
                              // 2nd row
                              table.Cell().LabelCell("Severity");
-                             table.Cell().ValueCell().Text(_vuln.Severity).FontColor(GetSeverityColor(_vuln.Priority)).Bold();
+                             table.Cell().ValueCell().Text(_vuln.Severity).FontColorByPriority(_vuln.Priority).Bold();
 
                              table.Cell().LabelCell("File");
                              table.Cell().ValueCell().Text(_vuln.Location.File);
@@ -73,18 +73,6 @@ namespace SemgrepReports.Components
                          });
                 }
             );
-        }
-
-        private static string GetSeverityColor(int priority)
-        {
-            return priority switch
-            {
-                1 => Colors.Red.Medium,
-                2 => Colors.Orange.Medium,
-                3 => Colors.Yellow.Medium,
-                4 => Colors.Green.Medium,
-                _ => Colors.Black,
-            };
         }
     }
 }

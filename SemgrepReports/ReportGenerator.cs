@@ -67,18 +67,6 @@ namespace SemgrepReports
             page.DefaultTextStyle(textStyle);
         }
 
-        private static string GetFontByOs()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                return "Verdana";
-            }
-            else
-            {
-                return "DejaVu Sans";
-            }
-        }
-
         private static void GenerateHeader(Report report, PageDescriptor page)
         {
             page
@@ -99,15 +87,18 @@ namespace SemgrepReports
 
                    column.Item().Component(new Overview(report));
                    column.Item().Component(new ExecutiveSummary(report));
+
                    column.Item().PageBreak();
-
-                   column.Item().IndexedSection("Findings").Text("Findings").H1();
-
                    var vulns = report.Vulnerabilities
                                        .OrderBy(x => x.Priority)
                                        .ThenBy(x => x.Location.File)
                                        .ThenBy(x => x.Location.StartLine)
                                        .ToList();
+
+                   column.Item().Component(new SummaryTable(vulns));
+                   column.Item().PageBreak();
+
+                   column.Item().IndexedSection("Finding Details").Text("Finding Details").H1();
 
                    for (int i = 0; i < vulns.Count; i++)
                    {
@@ -144,6 +135,17 @@ namespace SemgrepReports
                     x.Span(" of ").HeaderOrFooter();
                     x.TotalPages().HeaderOrFooter();
                 });
+        }
+        private static string GetFontByOs()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return "Verdana";
+            }
+            else
+            {
+                return "DejaVu Sans";
+            }
         }
     }
 }

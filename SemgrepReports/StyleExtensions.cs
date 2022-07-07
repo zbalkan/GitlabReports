@@ -27,5 +27,19 @@ namespace SemgrepReports
         public static TextSpanDescriptor H2(this TextSpanDescriptor text) => text.SemiBold().FontSize(16).FontColor(Colors.Grey.Darken2);
 
         public static TextSpanDescriptor HeaderOrFooter(this TextSpanDescriptor text) => text.Light().FontSize(11).FontColor(Colors.Grey.Medium);
+
+        public static TextSpanDescriptor FontColorByPriority(this TextSpanDescriptor text, int priority) => text.FontColor(GetSeverityColor(priority));
+
+        private static string GetSeverityColor(int priority)
+        {
+            return priority switch
+            {
+                1 => Colors.Red.Medium,
+                2 => Colors.Orange.Medium,
+                3 => Colors.Yellow.Medium,
+                4 => Colors.Green.Medium,
+                _ => Colors.Black,
+            };
+        }
     }
 }
