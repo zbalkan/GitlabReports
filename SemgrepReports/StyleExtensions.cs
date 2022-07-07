@@ -11,7 +11,7 @@ namespace SemgrepReports
             return container
                 .Border(1)
                 .Background(dark ? Colors.Grey.Lighten3 : Colors.White)
-                .Padding(5);
+                .Padding(4);
         }
 
         // displays only text label
@@ -22,9 +22,9 @@ namespace SemgrepReports
 
         public static TextSpanDescriptor Title(this TextSpanDescriptor text) => text.Bold().FontSize(32).FontColor(Colors.Grey.Darken4);
 
-        public static TextSpanDescriptor H1(this TextSpanDescriptor text) => text.Bold().FontSize(20).FontColor(Colors.Grey.Darken3);
+        public static TextSpanDescriptor H1(this TextSpanDescriptor text) => text.Bold().FontSize(18).FontColor(Colors.Grey.Darken3);
 
-        public static TextSpanDescriptor H2(this TextSpanDescriptor text) => text.SemiBold().FontSize(16).FontColor(Colors.Grey.Darken2);
+        public static TextSpanDescriptor H2(this TextSpanDescriptor text) => text.SemiBold().FontSize(14).FontColor(Colors.Grey.Darken2);
 
         public static TextSpanDescriptor HeaderOrFooter(this TextSpanDescriptor text) => text.Light().FontSize(11).FontColor(Colors.Grey.Medium);
 

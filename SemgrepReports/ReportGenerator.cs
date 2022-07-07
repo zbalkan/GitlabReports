@@ -61,7 +61,7 @@ namespace SemgrepReports
             page.PageColor(Colors.White);
 
             var textStyle = new TextStyle()
-                .FontSize(11)
+                .FontSize(10)
                 .FontFamily(GetFontByOs());
 
             page.DefaultTextStyle(textStyle);
