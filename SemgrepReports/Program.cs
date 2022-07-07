@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Utility.CommandLine;
 
 namespace SemgrepReports
@@ -45,25 +44,14 @@ namespace SemgrepReports
         {
             var helpAttributes = Arguments.GetArgumentInfo(typeof(Program));
 
-            var maxLen = helpAttributes.Select(a => a.Property.PropertyType.ToColloquialString()).OrderByDescending(s => s.Length).FirstOrDefault().Length;
-
-            Console.WriteLine($"Short\tLong\t\t{"Type".PadRight(maxLen)}\tFunction");
-            Console.WriteLine($"-----\t----\t\t{"----".PadRight(maxLen)}\t--------");
+            Console.WriteLine("Short\tLong\tFunction");
+            Console.WriteLine("-----\t----\t--------");
 
             foreach (var item in helpAttributes)
             {
-                var result = item.ShortName + "\t" + item.LongName + "\t\t" + item.Property.PropertyType.ToColloquialString().PadRight(maxLen) + "\t" + item.HelpText;
+                var result = item.ShortName + "\t" + item.LongName + "\t" + item.HelpText;
                 Console.WriteLine(result);
             }
         }
-
-        /// <summary>
-        ///     Returns a "pretty" string representation of the provided Type; specifically, corrects the naming of generic Types
-        ///     and appends the type parameters for the type to the name as it appears in the code editor.
-        /// </summary>
-        /// <param name="type">The type for which the colloquial name should be created.</param>
-        /// <returns>A "pretty" string representation of the provided Type.</returns>
-        private static string ToColloquialString(this Type type) => (!type.IsGenericType ? type.Name : type.Name.Split('`')[0] + "<" + string.Join(", ", type.GetGenericArguments().Select(a => a.ToColloquialString())) + ">");
-
     }
 }

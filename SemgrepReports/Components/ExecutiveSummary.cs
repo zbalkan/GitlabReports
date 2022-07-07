@@ -27,7 +27,6 @@ namespace SemgrepReports.Components
                 .Append(_vulns.Count(v => v.Priority == 3)).Append(" Medium, and")
                 .Append(_vulns.Count(v => v.Priority == 4)).Append(" Low severity vulnerabilities.");
 
-
             container
                 .Decoration(decoration =>
                 {
