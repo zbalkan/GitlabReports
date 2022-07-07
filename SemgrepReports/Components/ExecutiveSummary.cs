@@ -1,7 +1,6 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -20,11 +19,11 @@ namespace SemgrepReports.Components
         {
             var summary = new StringBuilder(100);
             summary.Append("During the scan ").Append(_report.Vulnerabilities.Count).Append(" vulnerabilities have been found.")
-                .Append(_report.Vulnerabilities.Count(v => v.Priority <= 3)).AppendLine(" of them have a higher severity than Medium.")
+                .Append(_report.Vulnerabilities.Count(v => v.Priority <= 3)).AppendLine(" of them have a higher severity than Medium. ")
                 .Append("The report includes ")
                 .Append(_report.Vulnerabilities.Count(v => v.Priority == 1)).Append(" Critical, ")
                 .Append(_report.Vulnerabilities.Count(v => v.Priority == 2)).Append(" High, ")
-                .Append(_report.Vulnerabilities.Count(v => v.Priority == 3)).Append(" Medium, and")
+                .Append(_report.Vulnerabilities.Count(v => v.Priority == 3)).Append(" Medium, and ")
                 .Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).Append(" Low severity vulnerabilities.");
 
             container

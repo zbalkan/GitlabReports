@@ -100,7 +100,7 @@ namespace SemgrepReports
 
                    column.Item().IndexedSection("Finding Details").Text("Finding Details").H1();
 
-                   for (int i = 0; i < vulns.Count; i++)
+                   for (var i = 0; i < vulns.Count; i++)
                    {
                        column.Item().Component(new Finding(vulns[i], i + 1));
                    }
@@ -113,7 +113,7 @@ namespace SemgrepReports
                        column.Item().Row(row =>
                        {
                            row.Spacing(5);
-                           for (int i = 1; i < section.Item2; i++)
+                           for (var i = 1; i < section.Item2; i++)
                            {
                                row.AutoItem().Text("  ");
                            }
@@ -136,16 +136,6 @@ namespace SemgrepReports
                     x.TotalPages().HeaderOrFooter();
                 });
         }
-        private static string GetFontByOs()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                return "Verdana";
-            }
-            else
-            {
-                return "DejaVu Sans";
-            }
-        }
+        private static string GetFontByOs() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Verdana" : "DejaVu Sans";
     }
 }
