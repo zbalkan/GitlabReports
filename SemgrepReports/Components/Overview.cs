@@ -7,6 +7,7 @@ namespace SemgrepReports.Components
     internal sealed class Overview : IComponent
     {
         private readonly Report _report;
+
         public Overview(Report report)
         {
             _report = report;

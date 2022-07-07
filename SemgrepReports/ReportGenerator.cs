@@ -91,7 +91,7 @@ namespace SemgrepReports
                     column.Item().PageBreak();
 
                     column.Item().Component(new Overview(report));
-                    column.Item().Component(new ExecutiveSummary(vulns));
+                    column.Item().Component(new ExecutiveSummary(report));
                     column.Item().PageBreak();
 
                     column.Item().Section("Findings").Text("Findings").H1();
