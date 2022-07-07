@@ -17,11 +17,12 @@ namespace SemgrepReports
         {
             if (string.IsNullOrEmpty(input))
             {
-                throw new System.ArgumentException($"'{nameof(input)}' cannot be null or empty.", nameof(input));
+                throw new ArgumentException($"'{nameof(input)}' cannot be null or empty.", nameof(input));
             }
 
             var jsonString = File.ReadAllText(input);
-            var report = JsonSerializer.Deserialize<Report>(jsonString);
+            var defaultOptions = new JsonSerializerOptions();
+            var report = JsonSerializer.Deserialize<Report>(jsonString, defaultOptions);
             return report;
         }
 
