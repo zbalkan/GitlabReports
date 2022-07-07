@@ -16,7 +16,7 @@ namespace SemgrepReports.Components
         public void Compose(IContainer container)
         {
             container
-                .Section("Overview")
+                .IndexedSection("Overview")
                 .Decoration(decoration =>
                 {
                     decoration

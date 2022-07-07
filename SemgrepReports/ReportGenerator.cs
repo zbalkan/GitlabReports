@@ -76,28 +76,44 @@ namespace SemgrepReports
 
         private static void GenerateContent(Report report, PageDescriptor page)
         {
-             page
-                .Content()
-                .Column(column =>
-                {
-                    column.Item().Component(new TitlePage(report));
-                    column.Item().PageBreak();
+            page
+               .Content()
+               .Column(column =>
+               {
+                   column.Item().Component(new TitlePage(report));
+                   column.Item().PageBreak();
 
-                    column.Item().Component(new Overview(report));
-                    column.Item().Component(new ExecutiveSummary(report));
-                    column.Item().PageBreak();
+                   column.Item().Component(new Overview(report));
+                   column.Item().Component(new ExecutiveSummary(report));
+                   column.Item().PageBreak();
 
-                    column.Item().Section("Findings").Text("Findings").H1();
+                   column.Item().IndexedSection("Findings").Text("Findings").H1();
 
-                    foreach (var vuln in report
-                                            .Vulnerabilities
-                                            .OrderBy(x => x.Priority)
-                                            .ThenBy(x => x.Location.File)
-                                            .ThenBy(x => x.Location.StartLine))
-                    {
-                        column.Item().Component(new Finding(vuln));
-                    }
-                });
+                   foreach (var vuln in report
+                                           .Vulnerabilities
+                                           .OrderBy(x => x.Priority)
+                                           .ThenBy(x => x.Location.File)
+                                           .ThenBy(x => x.Location.StartLine))
+                   {
+                       column.Item().Component(new Finding(vuln));
+                   }
+
+                   column.Item().PageBreak();
+                   column.Item().Section("Index").PaddingBottom(1, Unit.Centimetre).Text("Index").H1();
+
+                   foreach (var section in Index.Instance.Sections)
+                   {
+                       column.Item().Row(row =>
+                       {
+                           row.Spacing(5);
+                           for (int i = 1; i < section.Item2; i++)
+                           {
+                               row.AutoItem().Text("  ");
+                           }
+                           row.RelativeItem().SectionLink(section.Item1).Text($"- {section.Item1}");
+                       });
+                   }
+               });
         }
 
         private static void GenerateFooter(PageDescriptor page)

@@ -28,7 +28,7 @@ namespace SemgrepReports.Components
                 .Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).Append(" Low severity vulnerabilities.");
 
             container
-                .Section("Executive Summary")
+                .IndexedSection("Executive Summary")
                 .Decoration(decoration =>
                 {
                     decoration

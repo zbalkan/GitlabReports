@@ -19,7 +19,7 @@ namespace SemgrepReports.Components
             var finding = $"{_vuln.Name} in {_vuln.Location.File}:L{_vuln.Location.StartLine}";
 
             container
-                .Section(finding)
+                .IndexedSection(finding, 2)
                 .Decoration(decoration =>
                 {
                     decoration
