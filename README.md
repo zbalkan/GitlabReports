@@ -15,7 +15,14 @@ o       output  Path of pdf file.
 ```
 
 ## Examples
+On Windows:
 ```bash
 SemgrepReports.exe -i reports.json -o reports.pdf
 SemgrepReports.exe -i reports.json # output file will be saved into working directory as reports.pdf
+```
+
+On Linux:
+```bash
+./SemgrepReports -i reports.json -o reports.pdf
+./SemgrepReports -i reports.json # output file will be saved into working directory as reports.pdf
 ```
