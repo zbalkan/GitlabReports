@@ -2,7 +2,6 @@
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models;
 using System.Collections.Generic;
-using static System.Collections.Specialized.BitVector32;
 
 namespace SemgrepReports.Components
 {

@@ -1,5 +1,4 @@
 ﻿using QuestPDF.Fluent;
-using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models;
 
@@ -67,7 +66,6 @@ namespace SemgrepReports.Components
                              table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Description);
 
                              // 5th row
-                             // 4th row
                              table.Cell().RowSpan(10).LabelCell("Message");
                              table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Message);
                          });

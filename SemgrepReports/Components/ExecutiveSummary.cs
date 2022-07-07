@@ -38,7 +38,8 @@ namespace SemgrepReports.Components
 
                     decoration
                     .Content()
-                    .Text(summary.ToString());
+                    .Text(summary.ToString())
+                    .LineHeight(1.5f);
                 }
             );
         }
