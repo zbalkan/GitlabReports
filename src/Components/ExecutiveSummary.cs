@@ -18,13 +18,13 @@ namespace SemgrepReports.Components
         public void Compose(IContainer container)
         {
             var summary = new StringBuilder(100);
-            summary.Append("During the scan ").Append(_report.Vulnerabilities.Count).Append(" vulnerabilities have been found.")
+            summary.Append("During the scan ").Append(_report.Vulnerabilities.Count).Append(" vulnerabilities have been found. ")
                 .Append(_report.Vulnerabilities.Count(v => v.Priority <= 3)).AppendLine(" of them have a higher severity than Medium. ")
-                .Append("The report includes ")
-                .Append(_report.Vulnerabilities.Count(v => v.Priority == 1)).Append(" Critical, ")
-                .Append(_report.Vulnerabilities.Count(v => v.Priority == 2)).Append(" High, ")
-                .Append(_report.Vulnerabilities.Count(v => v.Priority == 3)).Append(" Medium, and ")
-                .Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).Append(" Low severity vulnerabilities.");
+                .AppendLine("The report includes:")
+                .Append("  - ").Append(_report.Vulnerabilities.Count(v => v.Priority == 1)).AppendLine(" Critical, ")
+                .Append("  - ").Append(_report.Vulnerabilities.Count(v => v.Priority == 2)).AppendLine(" High, ")
+                .Append("  - ").Append(_report.Vulnerabilities.Count(v => v.Priority == 3)).AppendLine(" Medium, ")
+                .Append("  - ").Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).AppendLine(" Low severity vulnerabilities.");
 
             container
                 .IndexedSection("Executive Summary")

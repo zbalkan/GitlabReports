@@ -26,7 +26,7 @@ namespace SemgrepReports
 
         public static TextSpanDescriptor H2(this TextSpanDescriptor text) => text.SemiBold().FontSize(14).FontColor(Colors.Grey.Darken2);
 
-        public static TextSpanDescriptor HeaderOrFooter(this TextSpanDescriptor text) => text.Light().FontSize(11).FontColor(Colors.Grey.Medium);
+        public static TextSpanDescriptor HeaderOrFooter(this TextSpanDescriptor text) => text.Light().FontSize(9).FontColor(Colors.Grey.Medium);
 
         public static TextSpanDescriptor FontColorByPriority(this TextSpanDescriptor text, int priority) => text.FontColor(GetSeverityColor(priority));
 

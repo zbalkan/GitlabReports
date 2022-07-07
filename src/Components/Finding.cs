@@ -4,13 +4,13 @@ using SemgrepReports.Models;
 
 namespace SemgrepReports.Components
 {
-    internal sealed class Finding : IComponent
+    internal sealed class FindingDetail : IComponent
     {
         private readonly Vulnerability _vuln;
 
         private readonly int _order;
 
-        public Finding(Vulnerability vuln, int order)
+        public FindingDetail(Vulnerability vuln, int order)
         {
             _vuln = vuln;
             _order = order;
