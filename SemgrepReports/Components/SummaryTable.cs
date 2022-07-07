@@ -2,6 +2,7 @@
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models;
 using System.Collections.Generic;
+using static System.Collections.Specialized.BitVector32;
 
 namespace SemgrepReports.Components
 {
@@ -38,7 +39,7 @@ namespace SemgrepReports.Components
                                      columns.RelativeColumn();
                                  });
 
-                                // Table header
+                                 // Table header
                                  table.Cell().LabelCell("Number");
                                  table.Cell().LabelCell("Severity");
                                  table.Cell().LabelCell("Vulnerability");
@@ -46,9 +47,13 @@ namespace SemgrepReports.Components
                                  for (int i = 0; i < _vulns.Count; i++)
                                  {
                                      var vuln = _vulns[i];
-                                     table.Cell().ValueCell().AlignCenter().Text(i + 1);
+                                     var order = i + 1;
+                                     var finding = $"{vuln.Name} in file: \"{vuln.Location.File}\" line: {vuln.Location.StartLine}";
+                                     var link = $"{order}. {finding}";
+
+                                     table.Cell().ValueCell().AlignCenter().Text(order);
                                      table.Cell().ValueCell().Text(vuln.Severity).FontColorByPriority(vuln.Priority).SemiBold();
-                                     table.Cell().ValueCell().Text(vuln.Name);
+                                     table.Cell().ValueCell().SectionLink(link).Text(finding);
                                  }
                              });
                 });

@@ -94,8 +94,8 @@ namespace SemgrepReports
                                        .ThenBy(x => x.Location.File)
                                        .ThenBy(x => x.Location.StartLine)
                                        .ToList();
-
-                   column.Item().Component(new SummaryTable(vulns));
+                   var summaryTable = new SummaryTable(vulns);
+                   column.Item().Component(summaryTable);
                    column.Item().PageBreak();
 
                    column.Item().IndexedSection("Finding Details").Text("Finding Details").H1();
@@ -103,22 +103,6 @@ namespace SemgrepReports
                    for (var i = 0; i < vulns.Count; i++)
                    {
                        column.Item().Component(new Finding(vulns[i], i + 1));
-                   }
-
-                   column.Item().PageBreak();
-                   column.Item().Section("Index").PaddingBottom(1, Unit.Centimetre).Text("Index").H1();
-
-                   foreach (var section in Index.Instance.Sections)
-                   {
-                       column.Item().Row(row =>
-                       {
-                           row.Spacing(5);
-                           for (var i = 1; i < section.Item2; i++)
-                           {
-                               row.AutoItem().Text("  ");
-                           }
-                           row.RelativeItem().SectionLink(section.Item1).Text($"- {section.Item1}");
-                       });
                    }
                });
         }
