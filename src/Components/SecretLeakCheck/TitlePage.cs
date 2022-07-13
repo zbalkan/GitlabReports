@@ -2,7 +2,7 @@
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models.SecretLeakCheck;
 
-namespace SemgrepReports.Components
+namespace SemgrepReports.Components.SecretLeakCheck
 {
     internal sealed class TitlePage : IComponent
     {
@@ -18,7 +18,7 @@ namespace SemgrepReports.Components
                         .Content()
                         .AlignCenter()
                         .PaddingTop(10, Unit.Centimetre)
-                        .Text($"Static Application Security Testing (SAST) Report\n(v{_report.Version})")
+                        .Text($"{_report.ReportType}\n(v{_report.Version})")
                         .Title());
     }
 }

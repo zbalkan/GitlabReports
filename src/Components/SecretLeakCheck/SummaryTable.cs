@@ -3,7 +3,7 @@ using QuestPDF.Infrastructure;
 using SemgrepReports.Models.SecretLeakCheck;
 using System.Collections.Generic;
 
-namespace SemgrepReports.Components
+namespace SemgrepReports.Components.SecretLeakCheck
 {
     internal sealed class SummaryTable : IComponent
     {

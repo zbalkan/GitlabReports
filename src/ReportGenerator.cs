@@ -1,19 +1,19 @@
-﻿using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
-using SemgrepReports.Components;
-using SemgrepReports.Models.SecretLeakCheck;
-using System;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using SemgrepReports.Models;
+using SemgrepReports.Models.CodeQuality;
+using SemgrepReports.Models.SecretLeakCheck;
 
 namespace SemgrepReports
 {
     internal static class ReportGenerator
     {
-        public static SecretLeakCheckReport Import(string input)
+        public static IReport Import(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -21,10 +21,20 @@ namespace SemgrepReports
             }
 
             var jsonString = File.ReadAllText(input);
-            return JsonSerializer.Deserialize<SecretLeakCheckReport>(jsonString, new JsonSerializerOptions());
+            IReport report;
+
+            try
+            {
+                report = JsonSerializer.Deserialize<SecretLeakCheckReport>(jsonString, new JsonSerializerOptions());
+            }
+            catch (JsonException)
+            {
+                report = JsonSerializer.Deserialize<CodeQualityReport>(jsonString, new JsonSerializerOptions());
+            }
+            return report;
         }
 
-        public static void Export(SecretLeakCheckReport report, string output)
+        public static void Export(IReport report, string output)
         {
             if (report is null)
             {
@@ -62,43 +72,28 @@ namespace SemgrepReports
             page.DefaultTextStyle(textStyle);
         }
 
-        private static void GenerateHeader(SecretLeakCheckReport report, PageDescriptor page) => page
+        private static void GenerateHeader(IReport report, PageDescriptor page) => page
                 .Header()
                 .AlignCenter()
                 .AlignTop()
-                .Text($"Static Application Security Testing (SAST) Report (v{report.Version})")
+                .Text(report.ReportType)
                 .HeaderOrFooter();
 
-        private static void GenerateContent(SecretLeakCheckReport report, PageDescriptor page) => page
-               .Content()
-               .Column(column =>
-               {
-                   column.Item().Component(new TitlePage(report));
-                   column.Item().PageBreak();
-
-                   column.Item().Component(new Overview(report));
-                   column.Item().Component(new ExecutiveSummary(report));
-
-                   column.Item().PageBreak();
-
-                   var vulns = report.Vulnerabilities
-                                       .OrderBy(x => x.Priority)
-                                       .ThenBy(x => x.Location.File)
-                                       .ThenBy(x => x.Location.StartLine)
-                                       .ToList();
-
-                   column.Item().Component(new SummaryTable(vulns));
-                   column.Item().PageBreak();
-
-                   column.Item().IndexedSection("Finding Details").Text("Finding Details").H1();
-
-                   for (var i = 0; i < vulns.Count; i++)
-                   {
-                       var order = i + 1;
-                       var vuln = vulns[i];
-                       column.Item().Component(new FindingDetail(vuln, order));
-                   }
-               });
+        private static void GenerateContent(IReport report, PageDescriptor page)
+        {
+            if (report is SecretLeakCheckReport secretLeakCheckReport)
+            {
+                Components.SecretLeakCheck.Content.Generate(secretLeakCheckReport, page);
+            }
+            else if (report is CodeQualityReport codeQualityReport)
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                throw new FormatException("Invalid JSON file");
+            }
+        }
 
         private static void GenerateFooter(PageDescriptor page) => page
                 .Footer()

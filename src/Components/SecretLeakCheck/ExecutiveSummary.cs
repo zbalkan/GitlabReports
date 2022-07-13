@@ -4,7 +4,7 @@ using SemgrepReports.Models.SecretLeakCheck;
 using System.Linq;
 using System.Text;
 
-namespace SemgrepReports.Components
+namespace SemgrepReports.Components.SecretLeakCheck
 {
     internal sealed class ExecutiveSummary : IComponent
     {

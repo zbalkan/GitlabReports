@@ -2,7 +2,7 @@
 using QuestPDF.Infrastructure;
 using SemgrepReports.Models.SecretLeakCheck;
 
-namespace SemgrepReports.Components
+namespace SemgrepReports.Components.SecretLeakCheck
 {
     internal sealed class Overview : IComponent
     {
