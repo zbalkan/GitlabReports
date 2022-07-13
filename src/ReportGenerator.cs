@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text.Json;
 using GitlabReports.Models;
-using GitlabReports.Models.CodeQuality;
-using GitlabReports.Models.SecretLeakCheck;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -14,33 +10,30 @@ namespace GitlabReports
 {
     internal static class ReportGenerator
     {
-        public static IReport Import(string input)
+        public static Tuple<IReport, Type> Import(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
                 throw new ArgumentException($"'{nameof(input)}' cannot be null or empty.", nameof(input));
             }
-
             var jsonString = File.ReadAllText(input);
-            IReport report;
 
-            try
+            foreach (var item in ModelReportMapping.Map.Values)
             {
-                report = JsonSerializer.Deserialize<SecretLeakCheckReport>(jsonString, new JsonSerializerOptions());
+                if (item.TryRead(jsonString, out var result))
+                {
+                    return result;
+                }
             }
-            catch (JsonException)
-            {
-                var findings = JsonSerializer.Deserialize<List<QualityIssue>>(jsonString, new JsonSerializerOptions());
-                report = new CodeQualityReport() { QualityIssues = findings };
-            }
-            return report;
+
+            throw new FormatException("The file format is not valid.");
         }
 
-        public static void Export(IReport report, string output)
+        public static void Export(Tuple<IReport, Type> reportInfo, string output)
         {
-            if (report is null)
+            if (reportInfo is null)
             {
-                throw new ArgumentNullException(nameof(report));
+                throw new ArgumentNullException(nameof(reportInfo));
             }
 
             if (string.IsNullOrEmpty(output))
@@ -48,11 +41,14 @@ namespace GitlabReports
                 throw new ArgumentException($"'{nameof(output)}' cannot be null or empty.", nameof(output));
             }
 
+            var report = reportInfo.Item1;
+            var type = reportInfo.Item2;
+
             Document.Create(container => _ = container.Page(page =>
                 {
                     SetupPage(page);
                     GenerateHeader(report, page);
-                    GenerateContent(report, page);
+                    GenerateContent(report, type, page);
                     GenerateFooter(page);
                 }))
                 .GeneratePdf(output);
@@ -81,21 +77,7 @@ namespace GitlabReports
                 .Text(report.ReportType)
                 .HeaderOrFooter();
 
-        private static void GenerateContent(IReport report, PageDescriptor page)
-        {
-            if (report is SecretLeakCheckReport secretLeakCheckReport)
-            {
-                Components.SecretLeakCheck.Content.Generate(secretLeakCheckReport, page);
-            }
-            else if (report is CodeQualityReport codeQualityReport)
-            {
-                Components.CodeQuality.Content.Generate(codeQualityReport, page);
-            }
-            else
-            {
-                throw new FormatException("Invalid JSON file");
-            }
-        }
+        private static void GenerateContent(IReport report, Type type, PageDescriptor page) => ModelReportMapping.Map[type].Generate(report, page);
 
         private static void GenerateFooter(PageDescriptor page) => page
                 .Footer()

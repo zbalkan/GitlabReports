@@ -1,12 +1,39 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using GitlabReports.Models;
 using GitlabReports.Models.CodeQuality;
 using QuestPDF.Fluent;
 
 namespace GitlabReports.Components.CodeQuality
 {
-    internal static class Content
+    internal sealed class Content : IReportContent
     {
-        public static void Generate(CodeQualityReport report, PageDescriptor page) => page
+        public void Generate(IReport report, PageDescriptor page) => Generate(report as CodeQualityReport, page);
+
+        public bool TryRead(string json, out Tuple<IReport, Type> result)
+        {
+            try
+            {
+                result = Serialize(json);
+                return true;
+            }
+            catch (Exception)
+            {
+                result = null;
+                return false;
+            }
+        }
+
+        private static Tuple<IReport, Type> Serialize(string json)
+        {
+            var findings = JsonSerializer.Deserialize<List<QualityIssue>>(json, new JsonSerializerOptions());
+            var report = new CodeQualityReport() { QualityIssues = findings };
+            return new Tuple<IReport, Type>(report, typeof(CodeQualityReport));
+        }
+
+        private static void Generate(CodeQualityReport report, PageDescriptor page) => page
                .Content()
                .Column(column =>
                {
