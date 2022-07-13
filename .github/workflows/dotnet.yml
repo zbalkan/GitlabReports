@@ -47,7 +47,7 @@ jobs:
     - name: Publish framework dependent
       shell: bash
       run: |
-        release_name="SemgrepReports-v1.0-${{ matrix.target }}"
+        release_name="SemgrepReports-v1.1-${{ matrix.target }}"
         # Build no self contained
         dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --no-self-contained
         
@@ -64,7 +64,7 @@ jobs:
     - name: Publish framework independent
       shell: bash
       run: |
-        release_name="SemgrepReports-v1.0-${{ matrix.target }}-self-contained"
+        release_name="SemgrepReports-v1.1-${{ matrix.target }}-self-contained"
         # Build self contained & trimmed
         dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true 
         
@@ -93,7 +93,7 @@ jobs:
       uses: softprops/action-gh-release@v0.1.14
       with:
         #tag_name: ${{ steps.tag.outputs.release_tag }}
-        tag_name: "v1.0"
+        tag_name: "v1.1"
         files: |
           *.zip
           *.tar.gz
