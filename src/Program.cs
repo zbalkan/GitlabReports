@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Utility.CommandLine;
 
 namespace SemgrepReports
@@ -30,7 +31,7 @@ namespace SemgrepReports
 
             Arguments.Populate();
 
-            if (ShowHelpText)
+            if (ShowHelpText || args.Length == 0)
             {
                 ShowHelp();
                 return;
