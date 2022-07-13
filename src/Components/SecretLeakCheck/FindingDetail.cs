@@ -18,7 +18,7 @@ namespace GitlabReports.Components.SecretLeakCheck
 
         public void Compose(IContainer container)
         {
-            var finding = $"{_order}. {_vuln.Name} in file: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
+            var finding = $"{_order}. \"{_vuln.Name}\" in file: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
 
             container
                 .IndexedSection(finding, 2)

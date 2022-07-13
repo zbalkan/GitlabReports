@@ -1,6 +1,8 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+using System;
+using System.Text;
 
 namespace GitlabReports
 {
@@ -26,6 +28,20 @@ namespace GitlabReports
         public static TextSpanDescriptor HeaderOrFooter(this TextSpanDescriptor text) => text.Light().FontSize(9).FontColor(Colors.Grey.Medium);
 
         public static TextSpanDescriptor FontColorByPriority(this TextSpanDescriptor text, int priority) => text.FontColor(GetSeverityColor(priority));
+
+        public static string SentenceCase(this string text) => string.Concat(text[0].ToString().ToUpperInvariant(), text.ToLowerInvariant().AsSpan(1));
+
+        public static string Capitalize(this string text)
+        {
+            var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var sb = new StringBuilder(32);
+            foreach (var word in words)
+            {
+                sb.Append(string.Concat(word[0].ToString().ToUpperInvariant(), word.ToLowerInvariant().AsSpan(1))).Append(' ');
+            }
+
+            return sb.ToString();
+        }
 
         private static string GetSeverityColor(int priority) => priority switch
         {

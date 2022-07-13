@@ -45,7 +45,7 @@ namespace GitlabReports.Components.CodeQuality
                                  {
                                      var issue = _issues[i];
                                      var order = i + 1;
-                                     var finding = $"{issue.CheckName} in path: \"{issue.Location.Path}\" line: {issue.Location.Lines.Begin}";
+                                     var finding = $"\"{issue.CheckName.Replace('_', ' ').Capitalize()}\" in path: \"{issue.Location.Path}\" line: {issue.Location.Lines.Begin}";
                                      var link = $"{order}. {finding}";
 
                                      table.Cell().ValueCell().AlignCenter().Text(order);

@@ -18,7 +18,7 @@ namespace GitlabReports.Components.CodeQuality
 
         public void Compose(IContainer container)
         {
-            var finding = $"{_order}. {_issue.CheckName} in path: \"{_issue.Location.Path}\" line: {_issue.Location.Lines.Begin}";
+            var finding = $"{_order}. \"{_issue.CheckName.Replace('_', ' ').Capitalize()}\" in path: \"{_issue.Location.Path}\" line: {_issue.Location.Lines.Begin}";
 
             container
                 .IndexedSection(finding, 2)
@@ -45,7 +45,7 @@ namespace GitlabReports.Components.CodeQuality
 
                              // 1st row
                              table.Cell().LabelCell("Name");
-                             table.Cell().ColumnSpan(3).ValueCell().Text(_issue.CheckName.Replace('_', ' ').ToUpperInvariant());
+                             table.Cell().ColumnSpan(3).ValueCell().Text(_issue.CheckName.Replace('_', ' ').Capitalize());
 
                              // 2nd row
                              table.Cell().LabelCell("Severity");
