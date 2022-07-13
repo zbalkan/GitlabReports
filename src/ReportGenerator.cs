@@ -13,7 +13,7 @@ namespace SemgrepReports
 {
     internal static class ReportGenerator
     {
-        public static Report Import(string input)
+        public static SecretLeakCheckReport Import(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -21,10 +21,10 @@ namespace SemgrepReports
             }
 
             var jsonString = File.ReadAllText(input);
-            return JsonSerializer.Deserialize<Report>(jsonString, new JsonSerializerOptions());
+            return JsonSerializer.Deserialize<SecretLeakCheckReport>(jsonString, new JsonSerializerOptions());
         }
 
-        public static void Export(Report report, string output)
+        public static void Export(SecretLeakCheckReport report, string output)
         {
             if (report is null)
             {
@@ -62,14 +62,14 @@ namespace SemgrepReports
             page.DefaultTextStyle(textStyle);
         }
 
-        private static void GenerateHeader(Report report, PageDescriptor page) => page
+        private static void GenerateHeader(SecretLeakCheckReport report, PageDescriptor page) => page
                 .Header()
                 .AlignCenter()
                 .AlignTop()
                 .Text($"Static Application Security Testing (SAST) Report (v{report.Version})")
                 .HeaderOrFooter();
 
-        private static void GenerateContent(Report report, PageDescriptor page) => page
+        private static void GenerateContent(SecretLeakCheckReport report, PageDescriptor page) => page
                .Content()
                .Column(column =>
                {

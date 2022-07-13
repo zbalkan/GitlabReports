@@ -6,9 +6,9 @@ namespace SemgrepReports.Components
 {
     internal sealed class TitlePage : IComponent
     {
-        private readonly Report _report;
+        private readonly SecretLeakCheckReport _report;
 
-        public TitlePage(Report report)
+        public TitlePage(SecretLeakCheckReport report)
         {
             _report = report;
         }

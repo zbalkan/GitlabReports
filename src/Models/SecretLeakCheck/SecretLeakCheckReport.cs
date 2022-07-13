@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SemgrepReports.Models.SecretLeakCheck
 {
-    public class Report
+    public class SecretLeakCheckReport
     {
         [JsonPropertyName("version")]
         public string Version { get; set; }

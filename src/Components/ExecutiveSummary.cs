@@ -8,9 +8,9 @@ namespace SemgrepReports.Components
 {
     internal sealed class ExecutiveSummary : IComponent
     {
-        private readonly Report _report;
+        private readonly SecretLeakCheckReport _report;
 
-        public ExecutiveSummary(Report report)
+        public ExecutiveSummary(SecretLeakCheckReport report)
         {
             _report = report;
         }
