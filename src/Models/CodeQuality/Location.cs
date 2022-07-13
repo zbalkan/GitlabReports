@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SemgrepReports.Models.CodeQuality
+namespace GitlabReports.Models.CodeQuality
 {
     public class Location
     {

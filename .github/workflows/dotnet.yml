@@ -47,9 +47,9 @@ jobs:
     - name: Publish framework dependent
       shell: bash
       run: |
-        release_name="SemgrepReports-v1.1-${{ matrix.target }}"
+        release_name="GitlabReports-v1.2-${{ matrix.target }}"
         # Build no self contained
-        dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --no-self-contained
+        dotnet publish src/GitlabReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --no-self-contained
         
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
@@ -64,9 +64,9 @@ jobs:
     - name: Publish framework independent
       shell: bash
       run: |
-        release_name="SemgrepReports-v1.1-${{ matrix.target }}-self-contained"
+        release_name="GitlabReports-v1.2-${{ matrix.target }}-self-contained"
         # Build self contained & trimmed
-        dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true 
+        dotnet publish src/GitlabReports.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true 
         
         # Remove PDB files
         rm ./${release_name}/*.pdb
@@ -93,7 +93,7 @@ jobs:
       uses: softprops/action-gh-release@v0.1.14
       with:
         #tag_name: ${{ steps.tag.outputs.release_tag }}
-        tag_name: "v1.1"
+        tag_name: "v1.2"
         files: |
           *.zip
           *.tar.gz

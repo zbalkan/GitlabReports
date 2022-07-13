@@ -1,8 +1,8 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using SemgrepReports.Models.CodeQuality;
+using GitlabReports.Models.CodeQuality;
 
-namespace SemgrepReports.Components.CodeQuality
+namespace GitlabReports.Components.CodeQuality
 {
     internal sealed class FindingDetail : IComponent
     {

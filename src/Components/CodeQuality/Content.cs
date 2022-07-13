@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using QuestPDF.Fluent;
-using SemgrepReports.Models.CodeQuality;
+using GitlabReports.Models.CodeQuality;
 
-namespace SemgrepReports.Components.CodeQuality
+namespace GitlabReports.Components.CodeQuality
 {
     internal static class Content
     {

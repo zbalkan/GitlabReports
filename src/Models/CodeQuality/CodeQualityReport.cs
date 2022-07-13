@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SemgrepReports.Models.CodeQuality
+namespace GitlabReports.Models.CodeQuality
 {
     public class CodeQualityReport : IReport
     {

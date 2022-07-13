@@ -1,10 +1,10 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using SemgrepReports.Models.SecretLeakCheck;
+using GitlabReports.Models.SecretLeakCheck;
 using System.Linq;
 using System.Text;
 
-namespace SemgrepReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SecretLeakCheck
 {
     internal sealed class ExecutiveSummary : IComponent
     {

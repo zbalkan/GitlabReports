@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SemgrepReports.Models.SecretLeakCheck
+namespace GitlabReports.Models.SecretLeakCheck
 {
     public class Scanner
     {

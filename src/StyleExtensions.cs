@@ -2,7 +2,7 @@
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
-namespace SemgrepReports
+namespace GitlabReports
 {
     static class StyleExtensions
     {

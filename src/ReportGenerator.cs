@@ -6,11 +6,11 @@ using System.Text.Json;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using SemgrepReports.Models;
-using SemgrepReports.Models.CodeQuality;
-using SemgrepReports.Models.SecretLeakCheck;
+using GitlabReports.Models;
+using GitlabReports.Models.CodeQuality;
+using GitlabReports.Models.SecretLeakCheck;
 
-namespace SemgrepReports
+namespace GitlabReports
 {
     internal static class ReportGenerator
     {

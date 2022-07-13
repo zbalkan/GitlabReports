@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SemgrepReports
+namespace GitlabReports
 {
     internal sealed class Index
     {

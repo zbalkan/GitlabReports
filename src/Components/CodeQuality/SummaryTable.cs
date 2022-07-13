@@ -1,9 +1,9 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using SemgrepReports.Models.CodeQuality;
+using GitlabReports.Models.CodeQuality;
 using System.Collections.Generic;
 
-namespace SemgrepReports.Components.CodeQuality
+namespace GitlabReports.Components.CodeQuality
 {
     internal sealed class SummaryTable : IComponent
     {

@@ -1,4 +1,4 @@
-﻿namespace SemgrepReports.Models
+﻿namespace GitlabReports.Models
 {
     public interface IReport
     {

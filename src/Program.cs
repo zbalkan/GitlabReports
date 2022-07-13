@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Utility.CommandLine;
 
-namespace SemgrepReports
+namespace GitlabReports
 {
     public static class Program
     {

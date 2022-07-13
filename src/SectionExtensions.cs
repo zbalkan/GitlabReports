@@ -1,7 +1,7 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace SemgrepReports
+namespace GitlabReports
 {
     public static class SectionExtensions
     {

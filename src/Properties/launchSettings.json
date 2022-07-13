@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SemgrepReports": {
+    "GitlabReports": {
       "commandName": "Project",
       "commandLineArgs": "-i gl-code-quality-report.json"
     }

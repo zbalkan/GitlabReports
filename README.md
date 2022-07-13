@@ -1,6 +1,6 @@
-# SemgrepReports
+# GitlabReports (former SemgrepReports)
 
-Parses Semgrep JSON reports and generates a PDF report.
+Parses Gitlab code qyality and Semgrep JSON reports and generates a PDF report. The executable uses shorthand `sr` from _SemgrepReports_, the initial name.
 
 ## USAGE
 ```

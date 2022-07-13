@@ -1,9 +1,9 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using SemgrepReports.Models.SecretLeakCheck;
+using GitlabReports.Models.SecretLeakCheck;
 using System.Collections.Generic;
 
-namespace SemgrepReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SecretLeakCheck
 {
     internal sealed class SummaryTable : IComponent
     {

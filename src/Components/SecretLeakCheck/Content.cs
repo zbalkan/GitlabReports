@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using QuestPDF.Fluent;
-using SemgrepReports.Models.SecretLeakCheck;
+using GitlabReports.Models.SecretLeakCheck;
 
-namespace SemgrepReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SecretLeakCheck
 {
     internal static class Content
     {
