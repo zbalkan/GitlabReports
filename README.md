@@ -1,6 +1,8 @@
 # GitlabReports (former SemgrepReports)
+[![Semgrep](https://github.com/zbalkan/GitlabReports/actions/workflows/semgrep.yml/badge.svg?branch=master)](https://github.com/zbalkan/GitlabReports/actions/workflows/semgrep.yml)
+[![.NET](https://github.com/zbalkan/GitlabReports/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/zbalkan/GitlabReports/actions/workflows/dotnet.yml)
 
-Parses Gitlab code qyality and Semgrep JSON reports and generates a PDF report. The executable uses shorthand `sr` from _SemgrepReports_, the initial name.
+Parses Gitlab code quality and Semgrep JSON reports and generates a PDF report. The executable uses shorthand `sr` from _SemgrepReports_, the initial name.
 
 ## USAGE
 ```
