@@ -39,7 +39,7 @@ namespace SemgrepReports.Components.CodeQuality
                                  // Table header
                                  table.Cell().LabelCell("Number");
                                  table.Cell().LabelCell("Severity");
-                                 table.Cell().LabelCell("Vulnerability");
+                                 table.Cell().LabelCell("Quality Issue");
 
                                  for (var i = 0; i < _issues.Count; i++)
                                  {
