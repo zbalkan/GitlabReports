@@ -1,6 +1,6 @@
-﻿using QuestPDF.Fluent;
+﻿using GitlabReports.Models.CodeQuality;
+using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using GitlabReports.Models.CodeQuality;
 
 namespace GitlabReports.Components.CodeQuality
 {

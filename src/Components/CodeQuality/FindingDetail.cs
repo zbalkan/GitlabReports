@@ -1,6 +1,6 @@
-﻿using QuestPDF.Fluent;
+﻿using GitlabReports.Models.CodeQuality;
+using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using GitlabReports.Models.CodeQuality;
 
 namespace GitlabReports.Components.CodeQuality
 {
@@ -45,7 +45,7 @@ namespace GitlabReports.Components.CodeQuality
 
                              // 1st row
                              table.Cell().LabelCell("Name");
-                             table.Cell().ColumnSpan(3).ValueCell().Text(_issue.CheckName.Replace('_',' ').ToUpperInvariant());
+                             table.Cell().ColumnSpan(3).ValueCell().Text(_issue.CheckName.Replace('_', ' ').ToUpperInvariant());
 
                              // 2nd row
                              table.Cell().LabelCell("Severity");

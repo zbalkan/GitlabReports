@@ -4,7 +4,7 @@ using QuestPDF.Infrastructure;
 
 namespace GitlabReports
 {
-    static class StyleExtensions
+    public static class StyleExtensions
     {
         private static IContainer Cell(this IContainer container, bool dark) => container
                 .Border(1)

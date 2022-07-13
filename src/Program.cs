@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using Utility.CommandLine;
 
 namespace GitlabReports
@@ -42,7 +41,7 @@ namespace GitlabReports
                 throw new ArgumentException($"'{nameof(InputFile)}' cannot be null or empty.", nameof(InputFile));
             }
 
-            if(string.IsNullOrEmpty(OutputFile))
+            if (string.IsNullOrEmpty(OutputFile))
             {
                 OutputFile = Path.ChangeExtension(InputFile, ".pdf");
             }

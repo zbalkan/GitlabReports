@@ -1,7 +1,7 @@
-﻿using QuestPDF.Fluent;
-using QuestPDF.Infrastructure;
+﻿using System.Collections.Generic;
 using GitlabReports.Models.SecretLeakCheck;
-using System.Collections.Generic;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
 
 namespace GitlabReports.Components.SecretLeakCheck
 {

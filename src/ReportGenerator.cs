@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
 using GitlabReports.Models;
 using GitlabReports.Models.CodeQuality;
 using GitlabReports.Models.SecretLeakCheck;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 
 namespace GitlabReports
 {

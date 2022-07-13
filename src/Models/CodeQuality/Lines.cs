@@ -10,6 +10,4 @@ namespace GitlabReports.Models.CodeQuality
         [JsonPropertyName("end")]
         public int End { get; set; }
     }
-
-
 }

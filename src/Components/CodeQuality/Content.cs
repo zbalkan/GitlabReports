@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using QuestPDF.Fluent;
 using GitlabReports.Models.CodeQuality;
+using QuestPDF.Fluent;
 
 namespace GitlabReports.Components.CodeQuality
 {
