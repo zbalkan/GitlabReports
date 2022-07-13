@@ -1,1 +1,2 @@
-dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime linux-x64 -c Release -o "SemgrepReports-linux-x64-self-contained" --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true
+@echo off
+dotnet publish src/SemgrepReports.csproj --framework net6.0 --runtime linux-x64 -c Release --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true
