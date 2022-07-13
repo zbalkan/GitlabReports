@@ -1,6 +1,6 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
-using SemgrepReports.Models;
+using SemgrepReports.Models.SecretLeakCheck;
 
 namespace SemgrepReports.Components
 {

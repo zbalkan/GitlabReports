@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace SemgrepReports.Models
+namespace SemgrepReports.Models.SecretLeakCheck
 {
     public class Scan
     {

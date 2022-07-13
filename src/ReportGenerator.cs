@@ -2,7 +2,7 @@
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SemgrepReports.Components;
-using SemgrepReports.Models;
+using SemgrepReports.Models.SecretLeakCheck;
 using System;
 using System.IO;
 using System.Linq;
