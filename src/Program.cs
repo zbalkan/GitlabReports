@@ -52,7 +52,7 @@ namespace GitlabReports
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
-            Console.WriteLine($"ERROR:{((Exception)e.ExceptionObject).Message}");
+            Console.WriteLine($"ERROR:\t{((Exception)e.ExceptionObject).Message}");
             Environment.Exit(1);
         }
 
