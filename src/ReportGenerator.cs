@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
@@ -29,7 +30,8 @@ namespace SemgrepReports
             }
             catch (JsonException)
             {
-                report = JsonSerializer.Deserialize<CodeQualityReport>(jsonString, new JsonSerializerOptions());
+                var findings = JsonSerializer.Deserialize<List<QualityIssue>>(jsonString, new JsonSerializerOptions());
+                report = new CodeQualityReport() { QualityIssues = findings };
             }
             return report;
         }
@@ -87,7 +89,7 @@ namespace SemgrepReports
             }
             else if (report is CodeQualityReport codeQualityReport)
             {
-                throw new NotImplementedException();
+                Components.CodeQuality.Content.Generate(codeQualityReport, page);
             }
             else
             {

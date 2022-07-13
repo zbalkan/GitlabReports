@@ -10,6 +10,4 @@ namespace SemgrepReports.Models.CodeQuality
         [JsonPropertyName("lines")]
         public Lines Lines { get; set; }
     }
-
-
 }

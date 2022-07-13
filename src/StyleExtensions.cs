@@ -29,10 +29,11 @@ namespace SemgrepReports
 
         private static string GetSeverityColor(int priority) => priority switch
         {
-            1 => Colors.Red.Medium,
-            2 => Colors.Orange.Medium,
-            3 => Colors.Yellow.Medium,
-            4 => Colors.Green.Medium,
+            1 => Colors.Red.Darken4,
+            2 => Colors.Red.Medium,
+            3 => Colors.Orange.Medium,
+            4 => Colors.Yellow.Medium,
+            5 => Colors.Green.Medium,
             _ => Colors.Black,
         };
     }
