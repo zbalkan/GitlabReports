@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text.Json;
-using GitlabReports.Components.Sast;
 using GitlabReports.Models;
 using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
@@ -10,7 +9,7 @@ namespace GitlabReports.Components.SastReport
 {
     internal sealed class Content : IReportContent
     {
-        public void Generate(IReport report, PageDescriptor page) => Generate(report as SastReport, page);
+        public void Generate(IReport report, PageDescriptor page) => Generate(report as SastReportModel, page);
 
         public bool TryRead(string json, out Tuple<IReport, Type> result)
         {
@@ -26,7 +25,7 @@ namespace GitlabReports.Components.SastReport
             }
         }
 
-        private static void Generate(SastReport report, PageDescriptor page) => page
+        private static void Generate(SastReportModel report, PageDescriptor page) => page
                .Content()
                .Column(column =>
                {
@@ -59,8 +58,8 @@ namespace GitlabReports.Components.SastReport
 
         private static Tuple<IReport, Type> Serialize(string json)
         {
-            var report = JsonSerializer.Deserialize<SastReport>(json, new JsonSerializerOptions());
-            return new Tuple<IReport, Type>(report, typeof(SastReport));
+            var report = JsonSerializer.Deserialize<SastReportModel>(json, new JsonSerializerOptions());
+            return new Tuple<IReport, Type>(report, typeof(SastReportModel));
         }
     }
 }

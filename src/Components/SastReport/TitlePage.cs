@@ -6,9 +6,9 @@ namespace GitlabReports.Components.SastReport
 {
     internal sealed class TitlePage : IComponent
     {
-        private readonly SastReport _report;
+        private readonly SastReportModel _report;
 
-        public TitlePage(SastReport report)
+        public TitlePage(SastReportModel report)
         {
             _report = report;
         }

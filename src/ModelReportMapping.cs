@@ -11,7 +11,7 @@ namespace GitlabReports
     {
         private static readonly Dictionary<Type, IReportContent> map = new()
         {
-                { typeof(SastReport), new Components.Sast.Content() },
+                { typeof(SastReportModel), new Components.SastReport.Content() },
                 { typeof(CodeQualityReport), new Components.CodeQuality.Content() }
         };
 

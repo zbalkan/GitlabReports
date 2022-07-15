@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GitlabReports.Models.SastReport
 {
-    public class SastReport : IReport
+    public class SastReportModel : IReport
     {
         [JsonPropertyName("version")]
         public string Version { get; set; }

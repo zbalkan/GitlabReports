@@ -8,9 +8,9 @@ namespace GitlabReports.Components.SastReport
 {
     internal sealed class ExecutiveSummary : IComponent
     {
-        private readonly SastReport _report;
+        private readonly SastReportModel _report;
 
-        public ExecutiveSummary(SastReport report)
+        public ExecutiveSummary(SastReportModel report)
         {
             _report = report;
         }
