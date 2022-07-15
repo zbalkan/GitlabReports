@@ -46,7 +46,7 @@ namespace GitlabReports.Components.Sast
 
                              // 1st row
                              table.Cell().LabelCell("Name");
-                             table.Cell().ColumnSpan(3).ValueCell().Text(_vuln.Name);
+                             table.Cell().ColumnSpan(3).ValueCell().Text(name);
 
                              // 2nd row
                              table.Cell().LabelCell("Severity");
