@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using GitlabReports.Models.SecretLeakCheck;
+using GitlabReports.Models.Sast;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.Sast
 {
     internal sealed class SummaryTable : IComponent
     {
@@ -45,7 +45,8 @@ namespace GitlabReports.Components.SecretLeakCheck
                                  {
                                      var vuln = _vulns[i];
                                      var order = i + 1;
-                                     var finding = $"{vuln.Name} in file: \"{vuln.Location.File}\" line: {vuln.Location.StartLine}";
+                                     var name = string.IsNullOrEmpty(vuln.Name) ? vuln.Message : vuln.Name;
+                                     var finding = $"\"{name}\" in path: \"{vuln.Location.File}\" line: {vuln.Location.StartLine}";
                                      var link = $"{order}. {finding}";
 
                                      table.Cell().ValueCell().AlignCenter().Text(order);

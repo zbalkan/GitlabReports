@@ -1,14 +1,14 @@
-﻿using GitlabReports.Models.SecretLeakCheck;
+﻿using GitlabReports.Models.Sast;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.Sast
 {
     internal sealed class TitlePage : IComponent
     {
-        private readonly SecretLeakCheckReport _report;
+        private readonly SastReport _report;
 
-        public TitlePage(SecretLeakCheckReport report)
+        public TitlePage(SastReport report)
         {
             _report = report;
         }

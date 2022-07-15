@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace GitlabReports.Models.SecretLeakCheck
+namespace GitlabReports.Models.Sast
 {
-    public class SecretLeakCheckReport : IReport
+    public class SastReport : IReport
     {
         [JsonPropertyName("version")]
         public string Version { get; set; }
@@ -14,6 +14,6 @@ namespace GitlabReports.Models.SecretLeakCheck
         [JsonPropertyName("scan")]
         public Scan Scan { get; set; }
 
-        public string ReportType => "Secret Leak Check Report";
+        public string ReportType => "SAST Report";
     }
 }

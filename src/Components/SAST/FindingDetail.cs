@@ -1,8 +1,8 @@
-﻿using GitlabReports.Models.SecretLeakCheck;
+﻿using GitlabReports.Models.Sast;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.Sast
 {
     internal sealed class FindingDetail : IComponent
     {
@@ -18,7 +18,8 @@ namespace GitlabReports.Components.SecretLeakCheck
 
         public void Compose(IContainer container)
         {
-            var finding = $"{_order}. \"{_vuln.Name}\" in file: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
+            var name = string.IsNullOrEmpty(_vuln.Name) ? _vuln.Message : _vuln.Name;
+            var finding = $"{_order}. \"{name}\" in path: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
 
             container
                 .IndexedSection(finding, 2)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GitlabReports.Components;
 using GitlabReports.Models.CodeQuality;
-using GitlabReports.Models.SecretLeakCheck;
+using GitlabReports.Models.Sast;
 
 namespace GitlabReports
 {
@@ -11,7 +11,7 @@ namespace GitlabReports
     {
         private static readonly Dictionary<Type, IReportContent> map = new()
         {
-                { typeof(SecretLeakCheckReport), new Components.SecretLeakCheck.Content() },
+                { typeof(SastReport), new Components.Sast.Content() },
                 { typeof(CodeQualityReport), new Components.CodeQuality.Content() }
         };
 

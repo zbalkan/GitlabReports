@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using System.Text;
-using GitlabReports.Models.SecretLeakCheck;
+using GitlabReports.Models.Sast;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.Sast
 {
     internal sealed class ExecutiveSummary : IComponent
     {
-        private readonly SecretLeakCheckReport _report;
+        private readonly SastReport _report;
 
-        public ExecutiveSummary(SecretLeakCheckReport report)
+        public ExecutiveSummary(SastReport report)
         {
             _report = report;
         }

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace GitlabReports.Models.SecretLeakCheck
+namespace GitlabReports.Models.Sast
 {
     public class Vendor
     {

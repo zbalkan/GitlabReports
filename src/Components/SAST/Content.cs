@@ -1,16 +1,15 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using GitlabReports.Models;
-using GitlabReports.Models.SecretLeakCheck;
+using GitlabReports.Models.Sast;
 using QuestPDF.Fluent;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.Sast
 {
     internal sealed class Content : IReportContent
     {
-        public void Generate(IReport report, PageDescriptor page) => Generate(report as SecretLeakCheckReport, page);
+        public void Generate(IReport report, PageDescriptor page) => Generate(report as SastReport, page);
 
         public bool TryRead(string json, out Tuple<IReport, Type> result)
         {
@@ -26,7 +25,7 @@ namespace GitlabReports.Components.SecretLeakCheck
             }
         }
 
-        private static void Generate(SecretLeakCheckReport report, PageDescriptor page) => page
+        private static void Generate(SastReport report, PageDescriptor page) => page
                .Content()
                .Column(column =>
                {
@@ -59,8 +58,8 @@ namespace GitlabReports.Components.SecretLeakCheck
 
         private static Tuple<IReport, Type> Serialize(string json)
         {
-            var report = JsonSerializer.Deserialize<SecretLeakCheckReport>(json, new JsonSerializerOptions());
-            return new Tuple<IReport, Type>(report, typeof(SecretLeakCheckReport));
+            var report = JsonSerializer.Deserialize<SastReport>(json, new JsonSerializerOptions());
+            return new Tuple<IReport, Type>(report, typeof(SastReport));
         }
     }
 }
