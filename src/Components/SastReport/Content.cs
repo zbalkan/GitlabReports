@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Text.Json;
+using GitlabReports.Components.Sast;
 using GitlabReports.Models;
-using GitlabReports.Models.Sast;
+using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 
-namespace GitlabReports.Components.Sast
+namespace GitlabReports.Components.SastReport
 {
     internal sealed class Content : IReportContent
     {

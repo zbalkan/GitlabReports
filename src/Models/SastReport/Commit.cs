@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace GitlabReports.Models.Sast
+namespace GitlabReports.Models.SastReport
 {
     public class Commit
     {

@@ -1,8 +1,8 @@
-﻿using GitlabReports.Models.Sast;
+﻿using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.Sast
+namespace GitlabReports.Components.SastReport
 {
     internal sealed class Overview : IComponent
     {

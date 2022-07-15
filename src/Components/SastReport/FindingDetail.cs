@@ -1,8 +1,8 @@
-﻿using GitlabReports.Models.Sast;
+﻿using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.Sast
+namespace GitlabReports.Components.SastReport
 {
     internal sealed class FindingDetail : IComponent
     {
@@ -64,7 +64,7 @@ namespace GitlabReports.Components.Sast
 
                              // 4th row
                              table.Cell().RowSpan(10).LabelCell("Description");
-                             table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Description);
+                             table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Description.Replace('\n', ' '));
 
                              // 5th row
                              table.Cell().RowSpan(10).LabelCell("Message");

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GitlabReports.Components;
 using GitlabReports.Models.CodeQuality;
-using GitlabReports.Models.Sast;
+using GitlabReports.Models.SastReport;
 
 namespace GitlabReports
 {
