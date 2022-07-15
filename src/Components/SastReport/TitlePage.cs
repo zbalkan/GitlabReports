@@ -4,13 +4,16 @@ using QuestPDF.Infrastructure;
 
 namespace GitlabReports.Components.SastReport
 {
-    internal sealed class TitlePage : IComponent
+    internal sealed class TitlePage : ISection
     {
+        public string Title { get; set; }
+
         private readonly SastReportModel _report;
 
         public TitlePage(SastReportModel report)
         {
             _report = report;
+            Title = $"{_report.ReportType}\n(v{_report.Version})";
         }
 
         public void Compose(IContainer container) => container
@@ -18,7 +21,7 @@ namespace GitlabReports.Components.SastReport
                         .Content()
                         .AlignCenter()
                         .PaddingTop(10, Unit.Centimetre)
-                        .Text($"{_report.ReportType}\n(v{_report.Version})")
+                        .Text(Title)
                         .Title());
     }
 }

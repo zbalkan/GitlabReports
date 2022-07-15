@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using GitlabReports.Models;
 using GitlabReports.Models.CodeQuality;
@@ -10,9 +9,19 @@ namespace GitlabReports.Components.CodeQuality
 {
     internal sealed class Content : IReportContent
     {
-        public void Generate(IReport report, PageDescriptor page) => Generate(report as CodeQualityReport, page);
+        public ISection TitlePage { get; set; }
 
-        public bool TryRead(string json, out Tuple<IReport, Type> result)
+        public ISection? Overview { get; set; }
+
+        public ISection ExecutiveSummary { get; set; }
+
+        public ISection SummaryTable { get; set; }
+
+        public ISection Findings { get; set; }
+
+        public void Generate(IReport report, PageDescriptor page) => Generate((CodeQualityReport)report, page);
+
+        public bool TryRead(string json, out Tuple<IReport, Type>? result)
         {
             try
             {
@@ -26,41 +35,37 @@ namespace GitlabReports.Components.CodeQuality
             }
         }
 
-        private static Tuple<IReport, Type> Serialize(string json)
+        private static Tuple<IReport, Type>? Serialize(string json)
         {
             var findings = JsonSerializer.Deserialize<List<QualityIssue>>(json, new JsonSerializerOptions());
+            if (findings == null)
+            {
+                return null;
+            }
+
             var report = new CodeQualityReport() { QualityIssues = findings };
             return new Tuple<IReport, Type>(report, typeof(CodeQualityReport));
         }
 
-        private static void Generate(CodeQualityReport report, PageDescriptor page) => page
+        private void Generate(CodeQualityReport report, PageDescriptor page)
+        {
+            TitlePage = new TitlePage(report);
+            ExecutiveSummary = new ExecutiveSummary(report);
+            SummaryTable = new SummaryTable(report);
+            Findings = new Findings(report);
+
+            page
                .Content()
                .Column(column =>
                {
-                   column.Item().Component(new TitlePage(report));
+                   column.Item().Component(TitlePage);
                    column.Item().PageBreak();
-
-                   column.Item().Component(new ExecutiveSummary(report));
-
+                   column.Item().Component(ExecutiveSummary);
                    column.Item().PageBreak();
-
-                   var issues = report.QualityIssues
-                                       .OrderBy(x => x.Priority)
-                                       .ThenBy(x => x.Location.Path)
-                                       .ThenBy(x => x.Location.Lines.Begin)
-                                       .ToList();
-
-                   column.Item().Component(new SummaryTable(issues));
+                   column.Item().Component(SummaryTable);
                    column.Item().PageBreak();
-
-                   column.Item().IndexedSection("Finding Details").Text("Finding Details").H1();
-
-                   for (var i = 0; i < issues.Count; i++)
-                   {
-                       var order = i + 1;
-                       var issue = issues[i];
-                       column.Item().Component(new FindingDetail(issue, order));
-                   }
+                   column.Item().Component(Findings);
                });
+        }
     }
 }

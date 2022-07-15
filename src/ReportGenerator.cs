@@ -22,7 +22,9 @@ namespace GitlabReports
             {
                 if (item.TryRead(jsonString, out var result))
                 {
+#pragma warning disable CS8603 // Possible null reference return.
                     return result;
+#pragma warning restore CS8603 // Possible null reference return.
                 }
             }
 

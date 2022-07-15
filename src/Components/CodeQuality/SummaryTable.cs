@@ -5,22 +5,25 @@ using QuestPDF.Infrastructure;
 
 namespace GitlabReports.Components.CodeQuality
 {
-    internal sealed class SummaryTable : IComponent
+    internal sealed class SummaryTable : ISection
     {
+        public string Title { get; set; }
+
         private readonly List<QualityIssue> _issues;
 
-        public SummaryTable(List<QualityIssue> issues)
+        public SummaryTable(CodeQualityReport report)
         {
-            _issues = issues;
+            _issues = report.QualityIssues;
+            Title = "Finding Summary";
         }
 
         public void Compose(IContainer container) => container
-                .IndexedSection("Finding Summary")
+                .IndexedSection(Title)
                 .Decoration(decoration =>
                 {
                     decoration
                     .Before()
-                    .Text("Finding Summary")
+                    .Text(Title)
                     .H1();
 
                     decoration

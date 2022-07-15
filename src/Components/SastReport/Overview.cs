@@ -4,22 +4,25 @@ using QuestPDF.Infrastructure;
 
 namespace GitlabReports.Components.SastReport
 {
-    internal sealed class Overview : IComponent
+    internal sealed class Overview : ISection
     {
+        public string Title { get; set; }
+
         private readonly SastReportModel _report;
 
         public Overview(SastReportModel report)
         {
             _report = report;
+            Title = "Overview";
         }
 
         public void Compose(IContainer container) => container
-                .IndexedSection("Overview")
+                .IndexedSection(Title)
                 .Decoration(decoration =>
                 {
                     decoration
                     .Before()
-                    .Text("Overview")
+                    .Text(Title)
                     .H1();
 
                     decoration

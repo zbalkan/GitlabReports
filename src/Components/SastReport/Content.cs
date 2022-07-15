@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text.Json;
 using GitlabReports.Models;
 using GitlabReports.Models.SastReport;
@@ -9,9 +8,19 @@ namespace GitlabReports.Components.SastReport
 {
     internal sealed class Content : IReportContent
     {
-        public void Generate(IReport report, PageDescriptor page) => Generate(report as SastReportModel, page);
+        public ISection TitlePage { get; set; }
 
-        public bool TryRead(string json, out Tuple<IReport, Type> result)
+        public ISection? Overview { get; set; }
+
+        public ISection ExecutiveSummary { get; set; }
+
+        public ISection SummaryTable { get; set; }
+
+        public ISection Findings { get; set; }
+
+        public void Generate(IReport report, PageDescriptor page) => Generate((SastReportModel)report, page);
+
+        public bool TryRead(string json, out Tuple<IReport, Type>? result)
         {
             try
             {
@@ -25,41 +34,36 @@ namespace GitlabReports.Components.SastReport
             }
         }
 
-        private static void Generate(SastReportModel report, PageDescriptor page) => page
+        private void Generate(SastReportModel report, PageDescriptor page)
+        {
+            TitlePage = new TitlePage(report);
+            Overview = new Overview(report);
+            ExecutiveSummary = new ExecutiveSummary(report);
+            SummaryTable = new SummaryTable(report);
+            Findings = new Findings(report);
+
+            page
                .Content()
                .Column(column =>
                {
-                   column.Item().Component(new TitlePage(report));
+                   column.Item().Component(TitlePage);
                    column.Item().PageBreak();
-
-                   column.Item().Component(new Overview(report));
-                   column.Item().Component(new ExecutiveSummary(report));
-
+                   column.Item().Component(Overview);
+                   column.Item().Component(ExecutiveSummary);
                    column.Item().PageBreak();
-
-                   var vulns = report.Vulnerabilities
-                                       .OrderBy(x => x.Priority)
-                                       .ThenBy(x => x.Location.File)
-                                       .ThenBy(x => x.Location.StartLine)
-                                       .ToList();
-
-                   column.Item().Component(new SummaryTable(vulns));
+                   column.Item().Component(SummaryTable);
                    column.Item().PageBreak();
-
-                   column.Item().IndexedSection("Finding Details").Text("Finding Details").H1();
-
-                   for (var i = 0; i < vulns.Count; i++)
-                   {
-                       var order = i + 1;
-                       var vuln = vulns[i];
-                       column.Item().Component(new FindingDetail(vuln, order));
-                   }
+                   column.Item().Component(Findings);
                });
+        }
 
-        private static Tuple<IReport, Type> Serialize(string json)
+        private static Tuple<IReport, Type>? Serialize(string json)
         {
             var report = JsonSerializer.Deserialize<SastReportModel>(json, new JsonSerializerOptions());
-            return new Tuple<IReport, Type>(report, typeof(SastReportModel));
+
+            return report == null
+                ? null
+                : new Tuple<IReport, Type>(report, typeof(SastReportModel));
         }
     }
 }

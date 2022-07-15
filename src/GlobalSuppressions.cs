@@ -11,3 +11,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "CA2208:Instantiate argument exceptions correctly", Justification = "<Pending>", Scope = "member", Target = "~M:GitlabReports.Program.Main(System.String[])")]
 [assembly: SuppressMessage("Roslynator", "RCS1163:Unused parameter.", Justification = "<Pending>", Scope = "member", Target = "~M:GitlabReports.Program.Main(System.String[])")]
 [assembly: SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>", Scope = "member", Target = "~M:GitlabReports.Program.Main(System.String[])")]
+[assembly: SuppressMessage("Performance", "U2U1005:Implement internal interfaces", Justification = "<Pending>", Scope = "type", Target = "~T:GitlabReports.Components.IReportSetup")]

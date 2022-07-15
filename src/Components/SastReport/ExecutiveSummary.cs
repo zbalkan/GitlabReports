@@ -6,13 +6,16 @@ using QuestPDF.Infrastructure;
 
 namespace GitlabReports.Components.SastReport
 {
-    internal sealed class ExecutiveSummary : IComponent
+    internal sealed class ExecutiveSummary : ISection
     {
+        public string Title { get; set; }
+
         private readonly SastReportModel _report;
 
         public ExecutiveSummary(SastReportModel report)
         {
             _report = report;
+            Title = "Executive Summary";
         }
 
         public void Compose(IContainer container)
@@ -27,13 +30,13 @@ namespace GitlabReports.Components.SastReport
                 .Append("  - ").Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).AppendLine(" Low severity vulnerabilities.");
 
             container
-                .IndexedSection("Executive Summary")
+                .IndexedSection(Title)
                 .Decoration(decoration =>
                 {
                     decoration
                         .Before()
                         .PaddingBottom(1, Unit.Centimetre)
-                        .Text("Executive Summary")
+                        .Text(Title)
                         .H1();
 
                     decoration
