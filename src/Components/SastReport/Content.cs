@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using GitlabReports.Models;
-using GitlabReports.Models.CodeQuality;
+using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 
-namespace GitlabReports.Components.CodeQuality
+namespace GitlabReports.Components.SastReport
 {
     internal sealed class Content : IReportContent
     {
@@ -19,7 +18,7 @@ namespace GitlabReports.Components.CodeQuality
 
         public ISection Findings { get; set; }
 
-        public void Generate(IReport report, PageDescriptor page) => Generate((CodeQualityReport)report, page);
+        public void Generate(IReport report, PageDescriptor page) => Generate((SastReportModel)report, page);
 
         public bool TryRead(string json, out Tuple<IReport, Type>? result)
         {
@@ -35,21 +34,10 @@ namespace GitlabReports.Components.CodeQuality
             }
         }
 
-        private static Tuple<IReport, Type>? Serialize(string json)
-        {
-            var findings = JsonSerializer.Deserialize<List<QualityIssue>>(json, new JsonSerializerOptions());
-            if (findings == null)
-            {
-                return null;
-            }
-
-            var report = new CodeQualityReport() { QualityIssues = findings };
-            return new Tuple<IReport, Type>(report, typeof(CodeQualityReport));
-        }
-
-        private void Generate(CodeQualityReport report, PageDescriptor page)
+        private void Generate(SastReportModel report, PageDescriptor page)
         {
             TitlePage = new TitlePage(report);
+            Overview = new Overview(report);
             ExecutiveSummary = new ExecutiveSummary(report);
             SummaryTable = new SummaryTable(report);
             Findings = new Findings(report);
@@ -60,12 +48,22 @@ namespace GitlabReports.Components.CodeQuality
                {
                    column.Item().Component(TitlePage);
                    column.Item().PageBreak();
+                   column.Item().Component(Overview);
                    column.Item().Component(ExecutiveSummary);
                    column.Item().PageBreak();
                    column.Item().Component(SummaryTable);
                    column.Item().PageBreak();
                    column.Item().Component(Findings);
                });
+        }
+
+        private static Tuple<IReport, Type>? Serialize(string json)
+        {
+            var report = JsonSerializer.Deserialize<SastReportModel>(json, new JsonSerializerOptions());
+
+            return report == null
+                ? null
+                : new Tuple<IReport, Type>(report, typeof(SastReportModel));
         }
     }
 }

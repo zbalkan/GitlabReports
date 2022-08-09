@@ -1,8 +1,8 @@
-﻿using QuestPDF.Fluent;
+﻿using System;
+using System.Text;
+using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using System;
-using System.Text;
 
 namespace GitlabReports
 {

@@ -1,8 +1,8 @@
-﻿using GitlabReports.Models.SecretLeakCheck;
+﻿using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SastReport
 {
     internal sealed class FindingDetail : IComponent
     {
@@ -18,7 +18,8 @@ namespace GitlabReports.Components.SecretLeakCheck
 
         public void Compose(IContainer container)
         {
-            var finding = $"{_order}. \"{_vuln.Name}\" in file: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
+            var name = string.IsNullOrEmpty(_vuln.Name) ? _vuln.Message : _vuln.Name;
+            var finding = $"{_order}. \"{name}\" in path: \"{_vuln.Location.File}\" line: {_vuln.Location.StartLine}";
 
             container
                 .IndexedSection(finding, 2)
@@ -45,7 +46,7 @@ namespace GitlabReports.Components.SecretLeakCheck
 
                              // 1st row
                              table.Cell().LabelCell("Name");
-                             table.Cell().ColumnSpan(3).ValueCell().Text(_vuln.Name);
+                             table.Cell().ColumnSpan(3).ValueCell().Text(name);
 
                              // 2nd row
                              table.Cell().LabelCell("Severity");
@@ -63,7 +64,7 @@ namespace GitlabReports.Components.SecretLeakCheck
 
                              // 4th row
                              table.Cell().RowSpan(10).LabelCell("Description");
-                             table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Description);
+                             table.Cell().RowSpan(10).ColumnSpan(3).ValueCell().Text(_vuln.Description.Replace('\n', ' '));
 
                              // 5th row
                              table.Cell().RowSpan(10).LabelCell("Message");

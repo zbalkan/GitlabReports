@@ -4,13 +4,16 @@ using QuestPDF.Infrastructure;
 
 namespace GitlabReports.Components.CodeQuality
 {
-    internal sealed class TitlePage : IComponent
+    internal sealed class TitlePage : ISection
     {
+        public string Title { get; set; }
+
         private readonly CodeQualityReport _report;
 
         public TitlePage(CodeQualityReport report)
         {
             _report = report;
+            Title = _report.ReportType;
         }
 
         public void Compose(IContainer container) => container
@@ -18,7 +21,7 @@ namespace GitlabReports.Components.CodeQuality
                         .Content()
                         .AlignCenter()
                         .PaddingTop(10, Unit.Centimetre)
-                        .Text(_report.ReportType)
+                        .Text(Title)
                         .Title());
     }
 }

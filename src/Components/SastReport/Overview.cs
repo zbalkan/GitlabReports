@@ -1,25 +1,28 @@
-﻿using GitlabReports.Models.SecretLeakCheck;
+﻿using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SastReport
 {
-    internal sealed class Overview : IComponent
+    internal sealed class Overview : ISection
     {
-        private readonly SecretLeakCheckReport _report;
+        public string Title { get; set; }
 
-        public Overview(SecretLeakCheckReport report)
+        private readonly SastReportModel _report;
+
+        public Overview(SastReportModel report)
         {
             _report = report;
+            Title = "Overview";
         }
 
         public void Compose(IContainer container) => container
-                .IndexedSection("Overview")
+                .IndexedSection(Title)
                 .Decoration(decoration =>
                 {
                     decoration
                     .Before()
-                    .Text("Overview")
+                    .Text(Title)
                     .H1();
 
                     decoration

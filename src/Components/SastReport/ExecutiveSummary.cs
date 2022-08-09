@@ -1,18 +1,21 @@
 ﻿using System.Linq;
 using System.Text;
-using GitlabReports.Models.SecretLeakCheck;
+using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SastReport
 {
-    internal sealed class ExecutiveSummary : IComponent
+    internal sealed class ExecutiveSummary : ISection
     {
-        private readonly SecretLeakCheckReport _report;
+        public string Title { get; set; }
 
-        public ExecutiveSummary(SecretLeakCheckReport report)
+        private readonly SastReportModel _report;
+
+        public ExecutiveSummary(SastReportModel report)
         {
             _report = report;
+            Title = "Executive Summary";
         }
 
         public void Compose(IContainer container)
@@ -27,13 +30,13 @@ namespace GitlabReports.Components.SecretLeakCheck
                 .Append("  - ").Append(_report.Vulnerabilities.Count(v => v.Priority == 4)).AppendLine(" Low severity vulnerabilities.");
 
             container
-                .IndexedSection("Executive Summary")
+                .IndexedSection(Title)
                 .Decoration(decoration =>
                 {
                     decoration
                         .Before()
                         .PaddingBottom(1, Unit.Centimetre)
-                        .Text("Executive Summary")
+                        .Text(Title)
                         .H1();
 
                     decoration

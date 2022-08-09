@@ -1,26 +1,29 @@
 ﻿using System.Collections.Generic;
-using GitlabReports.Models.SecretLeakCheck;
+using GitlabReports.Models.SastReport;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-namespace GitlabReports.Components.SecretLeakCheck
+namespace GitlabReports.Components.SastReport
 {
-    internal sealed class SummaryTable : IComponent
+    internal sealed class SummaryTable : ISection
     {
+        public string Title { get; set; }
+
         private readonly List<Vulnerability> _vulns;
 
-        public SummaryTable(List<Vulnerability> vulns)
+        public SummaryTable(SastReportModel report)
         {
-            _vulns = vulns;
+            _vulns = report.Vulnerabilities;
+            Title = "Finding Summary";
         }
 
         public void Compose(IContainer container) => container
-                .IndexedSection("Finding Summary")
+                .IndexedSection(Title)
                 .Decoration(decoration =>
                 {
                     decoration
                     .Before()
-                    .Text("Finding Summary")
+                    .Text(Title)
                     .H1();
 
                     decoration
@@ -45,7 +48,8 @@ namespace GitlabReports.Components.SecretLeakCheck
                                  {
                                      var vuln = _vulns[i];
                                      var order = i + 1;
-                                     var finding = $"{vuln.Name} in file: \"{vuln.Location.File}\" line: {vuln.Location.StartLine}";
+                                     var name = string.IsNullOrEmpty(vuln.Name) ? vuln.Message : vuln.Name;
+                                     var finding = $"\"{name}\" in path: \"{vuln.Location.File}\" line: {vuln.Location.StartLine}";
                                      var link = $"{order}. {finding}";
 
                                      table.Cell().ValueCell().AlignCenter().Text(order);
