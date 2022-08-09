@@ -5,6 +5,7 @@ using System.IO;
 using Spectre.Console.Cli;
 using System;
 using System.Threading;
+// ReSharper disable ClassNeverInstantiated.Global
 
 namespace GitlabReports
 {
@@ -12,10 +13,9 @@ namespace GitlabReports
     {
         public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
         {
-            var output = settings.OutputFile;
             if (string.IsNullOrEmpty(settings.OutputFile))
             {
-                output = Path.ChangeExtension(settings.InputFile, ".pdf");
+                settings.OutputFile = Path.ChangeExtension(settings.InputFile, ".pdf");
             }
 
             AnsiConsole.Status()
@@ -31,7 +31,7 @@ namespace GitlabReports
                             var report = ReportGenerator.Import(settings.InputFile);
                             Thread.Sleep(1000);
                             ctx.Status("Generating PDF...");
-                            ReportGenerator.Export(report, output);
+                            ReportGenerator.Export(report, settings.OutputFile);
                             Thread.Sleep(1000);
                         }
                         catch (Exception ex)
@@ -42,26 +42,37 @@ namespace GitlabReports
                     }
                 );
 
-            AnsiConsole.Write(new TextPath($"Report saved to: {Path.GetFullPath(output)}"));
+            AnsiConsole.Write(new TextPath($"Report saved to: {settings.OutputFile}"));
 
             return 0;
         }
 
         public sealed class Settings : CommandSettings
         {
+            private string _inputFile;
+            private string _outputFile;
+
             /// <summary>
             ///     Path of JSON file.
             /// </summary>
             [Description("Path of JSON file.")]
             [CommandOption("-i|--input")]
-            public string InputFile { get; init; }
+            public string InputFile
+            {
+                get => _inputFile;
+                set => _inputFile = Path.GetFullPath(value);
+            }
 
             /// <summary>
             ///     Path of PDF file.
             /// </summary>
             [Description("Path of PDF file.")]
             [CommandOption("-o|--output")]
-            public string OutputFile { get; init; }
+            public string OutputFile
+            {
+                get => _outputFile;
+                set => _outputFile = Path.GetFullPath(value);
+            }
         }
     }
 }
