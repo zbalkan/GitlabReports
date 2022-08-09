@@ -7,7 +7,11 @@ namespace GitlabReports
         public static int Main(string[] args)
         {
             var app = new CommandApp<GenerateReportCommand>();
-            app.Configure(c => c.AddExample(new[] { "-i", "report.json" }));
+            app.Configure(c =>
+            {
+                c.AddExample(new[] {"-i", "report.json"});
+                c.SetApplicationName("sr");
+            });
             return app.Run(args);
         }
     }
